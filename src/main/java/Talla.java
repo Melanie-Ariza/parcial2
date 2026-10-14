@@ -1,4 +1,9 @@
-public enum TallaCalzado {
+public enum Talla {
+    XS,
+    S,
+    M,
+    L,
+    XL,
     T35,
     T36,
     T37,
@@ -8,6 +13,5 @@ public enum TallaCalzado {
     T41,
     T42,
     T43,
-    T44,
-
+    T44
 }
