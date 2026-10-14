@@ -89,9 +89,7 @@ public double calcularSobrecargo() {
     if (this.categoriaPrenda == null) {
         return 0.0;
     }
-
-    // Multiplica el precio base por el porcentaje/valor de sobrecargo definido en el Enum
-    return this.precioUnitario * this.categoriaPrenda.getCalcularSobreCargo();
+    return precioUnitario * categoriaPrenda.getCalcularSobreCargo();
 }
 }
 
