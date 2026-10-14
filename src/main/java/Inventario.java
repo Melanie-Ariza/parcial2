@@ -61,13 +61,14 @@ public class Inventario {
                 ", Lista prendas=" + listaPrendas;
     }
 
-    // METODOSTOCK
+    /** // METODOSTOCK
     public boolean hayStockSuficiente(int cantidadSolicitada) {
         return this.cantidad >= cantidadSolicitada;
     }
 
     public void descontarStock(int cantidadVendida) {
         this.cantidad -= cantidadVendida;
-    }
+    } **/
+    
 }
 
