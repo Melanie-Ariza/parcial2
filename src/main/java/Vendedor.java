@@ -13,29 +13,17 @@ public class Vendedor extends Persona {
     }
 
     //GETSET
-    public String getCodigo() {
-        return codigo;
-    }
+    public String getCodigo() {return codigo;}
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+    public void setCodigo(String codigo) {this.codigo = codigo;}
 
-    public LocalDate getFechaContrato() {
-        return fechaContrato;
-    }
+    public LocalDate getFechaContrato() {return fechaContrato;}
 
-    public void setFechaContrato(LocalDate fechaContrato) {
-        this.fechaContrato = fechaContrato;
-    }
+    public void setFechaContrato(LocalDate fechaContrato) {this.fechaContrato = fechaContrato;}
 
-    public double getSalario() {
-        return salario;
-    }
+    public double getSalario() {return salario;}
 
-    public void setSalario(double salario) {
-        this.salario = salario;
-    }
+    public void setSalario(double salario) {this.salario = salario;}
 
     //TOSTRING
     @Override
