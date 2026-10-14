@@ -1,41 +1,66 @@
-public class Inventario {
-    private Prenda prenda;
-    private String color;
-    private String talla;
-    private int cantidad;
+import java.util.List;
 
-    public Inventario(Prenda prenda, String color, String talla, int cantidad) {
-        this.prenda = prenda;
+public class Inventario {
+    private String color;
+    private int cantidad;
+    private TallaCalzado tallaCalzado;
+    private TallaPrenda tallaPrenda;
+
+    //Listas
+    private List<Prenda> listaPrendas;
+
+    //Constructor
+    public Inventario(String color, int cantidad, TallaCalzado tallaCalzado, TallaPrenda tallaPrenda) {
         this.color = color;
-        this.talla = talla;
         this.cantidad = cantidad;
+        this.tallaCalzado= tallaCalzado;
+        this.tallaPrenda= tallaPrenda;
     }
     //GETSET
-    public Prenda getPrenda() {return prenda;}
-    public void setPrenda(Prenda prenda) {this.prenda = prenda;}
-
     public String getColor() {return color;}
 
     public void setColor(String color) {this.color = color;}
-
-    public String getTalla() {return talla;}
-
-    public void setTalla(String talla) {this.talla = talla;}
 
     public int getCantidad() {return cantidad;}
 
     public void setCantidad(int cantidad) {this.cantidad = cantidad;}
 
+    public TallaCalzado getTallaCalzado() {
+        return tallaCalzado;
+    }
+
+    public void setTallaCalzado(TallaCalzado tallaCalzado) {
+        this.tallaCalzado = tallaCalzado;
+    }
+
+    public TallaPrenda getTallaPrenda() {
+        return tallaPrenda;
+    }
+
+    public void setTallaPrenda(TallaPrenda tallaPrenda) {
+        this.tallaPrenda = tallaPrenda;
+    }
+
+    public List<Prenda> getListaPrendas() {
+        return listaPrendas;
+    }
+
+    public void setListaPrendas(List<Prenda> listaPrendas) {
+        this.listaPrendas = listaPrendas;
+    }
+
+    //toString
+
     @Override
     public String toString() {
-        return "Inventario{" +
-                "prenda=" + prenda.getNombre() +
-                ", color: " + color +
-                ", talla: " + talla +
-                ", cantidad: " + cantidad;
-
-
+        return "Inventario\n" +
+                "Color: " + color +
+                ", Cantidad: " + cantidad +
+                ", Talla calzado: " + tallaCalzado +
+                ", Talla Prenda: " + tallaPrenda +
+                ", Lista prendas=" + listaPrendas;
     }
+
     // METODOSTOCK
     public boolean hayStockSuficiente(int cantidadSolicitada) {
         return this.cantidad >= cantidadSolicitada;
