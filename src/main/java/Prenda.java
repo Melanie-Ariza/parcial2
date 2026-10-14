@@ -12,8 +12,8 @@ public class Prenda {
         this.nombre = nombre;
         this.marca = marca;
         this.precioUnitario = precioUnitario;
-        this.color= color;
-        this.talla= talla;
+        this.color = color;
+        this.talla = talla;
         this.categoriaPrenda = categoriaPrenda;
     }
 
@@ -25,21 +25,37 @@ public class Prenda {
         this.categoriaPrenda = categoriaPrenda;
     }
 
-    public String getCodigo() {return codigo;}
+    public String getCodigo() {
+        return codigo;
+    }
 
-    public void setCodigo(String codigo) {this.codigo = codigo;}
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-    public String getNombre() {return nombre;}
+    public String getNombre() {
+        return nombre;
+    }
 
-    public void setNombre(String nombre) {this.nombre = nombre;}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public String getMarca() {return marca;}
+    public String getMarca() {
+        return marca;
+    }
 
-    public void setMarca(String marca) {this.marca = marca;}
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
 
-    public double getPrecioUnitario() {return precioUnitario;}
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
 
-    public void setPrecioUnitario(double precioUnitario) {this.precioUnitario = precioUnitario;}
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
 
     public String getColor() {
         return color;
@@ -65,7 +81,18 @@ public class Prenda {
                 ", marca: " + marca +
                 ", precioUnitario: " + precioUnitario +
                 ", color: " + color +
-                ", talla: "+ talla +
+                ", talla: " + talla +
                 ", categoriaPrenda " + categoriaPrenda;
     }
+//Metodo calcular sobrecargo
+public double calcularSobrecargo() {
+    if (this.categoriaPrenda == null) {
+        return 0.0;
+    }
+
+    // Multiplica el precio base por el porcentaje/valor de sobrecargo definido en el Enum
+    return this.precioUnitario * this.categoriaPrenda.getCalcularSobreCargo();
 }
+}
+
+
