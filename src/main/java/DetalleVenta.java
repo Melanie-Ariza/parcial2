@@ -44,7 +44,6 @@ public class DetalleVenta {
         double subtotalAcumulado = 0.0;
 
         for (Prenda prenda : itemInventario.getListaPrendas()) {
-            // En lugar de repetir toda la lógica, llamamos al método que ya la calcula
             double precioFinalUnitario = calcularValorUnitarioFinal(cliente, prenda);
 
             subtotalAcumulado += precioFinalUnitario * this.cantidad;
