@@ -1,9 +1,16 @@
 public class DetalleVenta {
+    private Inventario itemInventario;
     private int cantidad;
 
-    public DetalleVenta(int cantidad) {
+    public DetalleVenta(Inventario itemInventario, int cantidad) {
+        this.itemInventario = itemInventario;
         this.cantidad = cantidad;
     }
+    //GETSET
+
+    public Inventario getItemInventario() {return itemInventario;}
+
+    public void setItemInventario(Inventario itemInventario) {this.itemInventario = itemInventario;}
 
     public int getCantidad() {
         return cantidad;
@@ -15,7 +22,23 @@ public class DetalleVenta {
 
     @Override
     public String toString() {
-        return "DetalleVenta\n" +
-                "Cantidad:" + cantidad;
+        return "DetalleVenta=" +
+                "prenda: " + itemInventario.getPrenda().getNombre() +
+                ", cantidad: " + cantidad;
+    }
+
+    //METODOS
+    //MetodoCalcularSubtotal
+    public double calcularSubtotal(Cliente cliente) {
+        // Precio con recargo por categoría de prenda
+        double precioBase = itemInventario.getPrenda().getPrecioUnitario();
+        double recargoPrenda = itemInventario.getPrenda().getCategoria().getCalcularSobreCargo();
+        double precioConRecargo = precioBase * (1 + recargoPrenda);
+
+        // Aplicar descuento según categoría del cliente
+        double descuentoCliente = cliente.getCategoria().getDescuento();
+        double precioFinalUnitario = precioConRecargo * (1 - descuentoCliente);
+
+        return precioFinalUnitario * cantidad;
     }
 }
