@@ -48,4 +48,15 @@ public class Venta {
                 ", Fecha venta: " + fechaVenta +
                 ", Lista detalles venta=" + listaDetallesVenta;
     }
+
+    // Calcular precio final
+    public double calcularValorTotal(Cliente cliente, Inventario itemInventario){
+        double valorFinal=0;
+        for (DetalleVenta detalleVenta: listaDetallesVenta){
+            valorFinal+= detalleVenta.calcularSubtotal(cliente, itemInventario);
+        }
+        valorFinal= valorFinal*(1-cliente.getCategoria().getDescuento());
+
+        return valorFinal;
+    }
 }
