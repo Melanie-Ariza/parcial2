@@ -22,8 +22,8 @@ public class DetalleVenta {
 
     @Override
     public String toString() {
-        return "Detalle Venta\n" +
-                "Prenda: " + itemInventario.getPrenda().getNombre() +
+        return "DetalleVenta=" +
+                "prenda: " + itemInventario.getListaPrendas().getNombre() +
                 ", cantidad: " + cantidad;
     }
 
@@ -31,8 +31,8 @@ public class DetalleVenta {
     //MetodoCalcularSubtotal
     public double calcularSubtotal(Cliente cliente) {
         // Precio con recargo por categoría de prenda
-        double precioBase = itemInventario.getPrenda().getPrecioUnitario();
-        double recargoPrenda = itemInventario.getPrenda().getCategoria().getCalcularSobreCargo();
+        double precioBase = itemInventario.getListaPrendas().getPrecioUnitario();
+        double recargoPrenda = itemInventario.getListaPrendas().getCategoria().getCalcularSobreCargo();
         double precioConRecargo = precioBase * (1 + recargoPrenda);
 
         // Aplicar descuento según categoría del cliente
