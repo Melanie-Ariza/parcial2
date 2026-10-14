@@ -3,5 +3,5 @@ public enum TallaPrenda {
     S,
     M,
     L,
-    XL,
+    XL
 }
