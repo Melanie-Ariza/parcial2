@@ -34,14 +34,23 @@ public class Inventario {
                 ", Lista prendas: " + listaPrendas;
     }
 
-    /** // METODOSTOCK
+    // METODOSTOCK
     public boolean hayStockSuficiente(int cantidadSolicitada) {
         return this.cantidad >= cantidadSolicitada;
     }
 
     public void descontarStock(int cantidadVendida) {
         this.cantidad -= cantidadVendida;
-    } **/
+    }
+
+    //Metodo mostrar nombres
+    public List<String> getNombresPrendas() {
+        List<String> nombres = new ArrayList<>();
+        for (Prenda prenda : this.listaPrendas) {
+            nombres.add(prenda.getNombre());
+        }
+        return nombres;
+    }
 
 }
 

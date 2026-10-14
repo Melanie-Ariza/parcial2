@@ -11,7 +11,5 @@ public enum CategoriaPrenda {
         this.calcularSobreCargo = calcularSobreCargo;
     }
 
-    public double getCalcularSobreCargo() {
-        return calcularSobreCargo;
-    }
+    public double getCalcularSobreCargo() {return calcularSobreCargo;}
 }
