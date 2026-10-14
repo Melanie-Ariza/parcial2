@@ -28,27 +28,27 @@ public class DetalleVenta {
     }
 
     //METODOS
-    //MetodoCalcularSubtotal
-    public double calcularSubtotal(Cliente cliente) {
+    // 1. Calcular el valor unitario final aplicando el recargo de la prenda
+    public double calcularValorUnitarioFinal(Cliente cliente, Prenda prenda) {
+        double precioBase = prenda.getPrecioUnitario();
+        double recargo = prenda.calcularSobrecargo();
+        double precioConRecargo = precioBase + recargo;
+
+        double descuentoCliente = cliente.getCategoria().getDescuento();
+
+        return precioConRecargo * (1 - descuentoCliente);
+    }
+
+    // 2. Calcular el subtotal
+    public double calcularSubtotal(Cliente cliente, Inventario itemInventario) {
         double subtotalAcumulado = 0.0;
 
         for (Prenda prenda : itemInventario.getListaPrendas()) {
-            double precioBase = prenda.getPrecioUnitario();
-            double recargoPrenda = prenda.getCategoriaPrenda().getCalcularSobreCargo();
-            double precioConRecargo = precioBase * (1 + recargoPrenda);
+            double precioFinalUnitario = calcularValorUnitarioFinal(cliente, prenda);
 
-            double descuentoCliente = cliente.getCategoria().getDescuento();
-            double precioFinalUnitario = precioConRecargo * (1 - descuentoCliente);
-
-            subtotalAcumulado += precioFinalUnitario * cantidad;
+            subtotalAcumulado += precioFinalUnitario * this.cantidad;
         }
 
         return subtotalAcumulado;
-    }
-        // Aplicar descuento según categoría del cliente
-        double descuentoCliente = cliente.getCategoria().getDescuento();
-        double precioFinalUnitario = precioConRecargo * (1 - descuentoCliente);
-
-        return precioFinalUnitario * cantidad;
     }
 }
