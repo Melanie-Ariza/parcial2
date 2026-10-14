@@ -36,8 +36,7 @@ public abstract class Persona {
         return documento +
                 ", nombre: " + nombre +
                 ", correo: " + correo +
-                ", telefono: " + telefono +
-                "";
+                ", telefono: " + telefono;
     }
 }
 

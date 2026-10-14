@@ -22,7 +22,7 @@ public class Cliente extends Persona {
     @Override
     public String toString() {
         // super.getNombre() para incluir los datos heredados de Persona y asi
-        return "Cliente=" +
+        return "Cliente \n" +
                 "documento: " + getDocumento() +
                 ", nombre: " + getNombre() +
                 ", correo: " + getCorreo() +
