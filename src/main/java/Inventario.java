@@ -3,18 +3,16 @@ import java.util.List;
 public class Inventario {
     private String color;
     private int cantidad;
-    private TallaCalzado tallaCalzado;
-    private TallaPrenda tallaPrenda;
+    private Talla talla;
 
     //Listas
     private List<Prenda> listaPrendas;
 
     //Constructor
-    public Inventario(String color, int cantidad, TallaCalzado tallaCalzado, TallaPrenda tallaPrenda) {
+    public Inventario(String color, int cantidad, Talla talla) {
         this.color = color;
         this.cantidad = cantidad;
-        this.tallaCalzado= tallaCalzado;
-        this.tallaPrenda= tallaPrenda;
+        this.talla= talla;
     }
     //GETSET
     public String getColor() {return color;}
@@ -25,20 +23,12 @@ public class Inventario {
 
     public void setCantidad(int cantidad) {this.cantidad = cantidad;}
 
-    public TallaCalzado getTallaCalzado() {
-        return tallaCalzado;
+    public Talla getTalla() {
+        return talla;
     }
 
-    public void setTallaCalzado(TallaCalzado tallaCalzado) {
-        this.tallaCalzado = tallaCalzado;
-    }
-
-    public TallaPrenda getTallaPrenda() {
-        return tallaPrenda;
-    }
-
-    public void setTallaPrenda(TallaPrenda tallaPrenda) {
-        this.tallaPrenda = tallaPrenda;
+    public void setTalla(Talla talla) {
+        this.talla = talla;
     }
 
     public List<Prenda> getListaPrendas() {
@@ -56,9 +46,8 @@ public class Inventario {
         return "Inventario\n" +
                 "Color: " + color +
                 ", Cantidad: " + cantidad +
-                ", Talla calzado: " + tallaCalzado +
-                ", Talla Prenda: " + tallaPrenda +
-                ", Lista prendas=" + listaPrendas;
+                ", Talla: " + talla +
+                ", Lista prendas: " + listaPrendas;
     }
 
     /** // METODOSTOCK
@@ -69,6 +58,6 @@ public class Inventario {
     public void descontarStock(int cantidadVendida) {
         this.cantidad -= cantidadVendida;
     } **/
-    
+
 }
 
