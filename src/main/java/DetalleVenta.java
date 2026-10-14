@@ -23,7 +23,7 @@ public class DetalleVenta {
     @Override
     public String toString() {
         return "DetalleVenta=" +
-                "prenda: " + itemInventario.getNombresPrendas() +
+                "prenda: " + itemInventario.getNombresPrendas()+
                 ", cantidad: " + cantidad;
     }
 
