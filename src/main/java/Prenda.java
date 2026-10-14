@@ -5,14 +5,24 @@ public class Prenda {
     private double precioUnitario;
     private String color;
     private Talla talla;
+    private CategoriaPrenda categoriaPrenda;
 
-    public Prenda(String codigo, String nombre, String marca, double precioUnitario, String color, Talla talla) {
+    public Prenda(String codigo, String nombre, String marca, double precioUnitario, String color, Talla talla, CategoriaPrenda categoriaPrenda) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.marca = marca;
         this.precioUnitario = precioUnitario;
         this.color= color;
         this.talla= talla;
+        this.categoriaPrenda = categoriaPrenda;
+    }
+
+    public CategoriaPrenda getCategoriaPrenda() {
+        return categoriaPrenda;
+    }
+
+    public void setCategoriaPrenda(CategoriaPrenda categoriaPrenda) {
+        this.categoriaPrenda = categoriaPrenda;
     }
 
     public String getCodigo() {return codigo;}
@@ -49,10 +59,13 @@ public class Prenda {
 
     @Override
     public String toString() {
-        return "Prenda\n" +
-                "Código: " + codigo +
-                ", Nombre: " + nombre +
-                ", Marca: " + marca +
-                ", Precio unitario=" + precioUnitario;
+        return "Prenda " +
+                "codigo: " + codigo +
+                ", nombre: " + nombre +
+                ", marca: " + marca +
+                ", precioUnitario: " + precioUnitario +
+                ", color: " + color +
+                ", talla: "+ talla +
+                ", categoriaPrenda " + categoriaPrenda;
     }
 }
