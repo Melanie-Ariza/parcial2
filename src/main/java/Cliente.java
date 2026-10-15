@@ -4,13 +4,13 @@ import java.util.List;
 public class Cliente extends Persona {
     private String codigo;
     private CategoriaCliente categoria;
-    private List<Venta> listaClienteVentas;
+    private List<Venta> listaCompras;
 
     public Cliente(int documento, String nombre, String correo, String telefono, String codigo, CategoriaCliente categoria) {
         super(documento, nombre, correo, telefono);
         this.codigo = codigo;
         this.categoria = categoria;
-        listaClienteVentas = new ArrayList<Venta>();
+        listaCompras = new ArrayList<Venta>();
     }
 
     //GETSET
@@ -23,12 +23,12 @@ public class Cliente extends Persona {
     public CategoriaCliente getCategoria() { return categoria; }
 
 
-    public List<Venta> getListaClienteVentas() {
-        return listaClienteVentas;
+    public List<Venta> getListaCompras() {
+        return listaCompras;
     }
 
-    public void setListaClienteVentas(List<Venta> listaClienteVentas) {
-        this.listaClienteVentas = listaClienteVentas;
+    public void setListaCompras(List<Venta> listaCompras) {
+        this.listaCompras = listaCompras;
     }
 
 //TOSTRING
@@ -37,9 +37,9 @@ public class Cliente extends Persona {
     @Override
     public String toString() {
         return "Cliente: " + super.toString() +
-                ", codigo" + codigo +
-                ", categoria: " + categoria +
-                ", listaVentas: " + listaClienteVentas;
+                ", Codigo" + codigo +
+                ", Categoria: " + categoria +
+                ", Lista compras: " + listaCompras;
     }
 
     //Metodos
@@ -47,7 +47,7 @@ public class Cliente extends Persona {
     //Verificar Compra
     public boolean verificarCompra(String codigo){
         boolean verificado = false;
-        for(Venta venta : listaClienteVentas){
+        for(Venta venta : listaCompras){
             if(venta.getCodigo().equalsIgnoreCase(codigo)){
                 verificado = true;
                 break;
@@ -61,7 +61,7 @@ public class Cliente extends Persona {
         boolean compraAgregada = false;
         boolean compraVerificada = verificarCompra(venta.getCodigo());
         if(!compraVerificada){
-            listaClienteVentas.add(venta);
+            listaCompras.add(venta);
             compraAgregada = true;
         }
         return compraAgregada;
