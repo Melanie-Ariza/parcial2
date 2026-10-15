@@ -69,9 +69,69 @@ public class Aplicacion {
         sucursal2.getListaVendedores().add(vendedor2);
         sucursal3.getListaVendedores().add(vendedor3);
 
+        int opcion;
+        do {
+            System.out.println("======= MODASTYLE =======");
+            System.out.println("1. Registrar prenda.");
+            System.out.println("2. Registrar cliente o vendedor.");
+            System.out.println("3. Registrar inventario en sucursal.");
+            System.out.println("4. Consultar prendas disponibles por sucursal.");
+            System.out.println("5. Registrar venta.");
+            System.out.println("6. Calcular precio unitario final.");
+            System.out.println("7. Calcular valor total de una venta.");
+            System.out.println("8. Consultar prendas agotadas.");
+            System.out.println("9. Consultar ventas por vendedor.");
+            System.out.println("10. Consultar compras por cliente.");
+            System.out.println("11. Calcular ingresos totales por sucursal.");
+            System.out.println("12. Consultar prenda más vendida.");
+            System.out.println("0. Salir.");
 
+            System.out.print("Ingrese una opción: ");
 
+            opcion = sc.nextInt();
+            sc.nextLine();
 
-
+            switch (opcion){
+                case 1:
+                    System.out.println("======= Registrar prenda =======");
+                    break;
+                case 2:
+                    System.out.println("======= Registrar cliente o vendedor =======");
+                    break;
+                case 3:
+                    System.out.println("======= Registrar inventario en sucursal =======");
+                    break;
+                case 4:
+                    System.out.println("======= Consultar prendas disponibles por sucursal =======");
+                    break;
+                case 5:
+                    System.out.println("======= Registrar venta =======");
+                    break;
+                case 6:
+                    System.out.println("======= Calcular precio unitario final =======");
+                    break;
+                case 7:
+                    System.out.println("======= Calcular valor total de una venta =======");
+                    break;
+                case 8:
+                    System.out.println("======= Consultar prendas agotadas =======");
+                    break;
+                case 9:
+                    System.out.println("======= Consultar ventas por vendedor =======");
+                    break;
+                case 10:
+                    System.out.println("======= Consultar compras por cliente =======");
+                    break;
+                case 11:
+                    System.out.println("======= Calcular ingresos totales por sucursal =======");
+                    break;
+                case 12:
+                    System.out.println("======= Consultar prenda más vendida =======");
+                    break;
+                default:
+                    System.out.println("Proceso finalizado, muchas gracias.");
+                    break;
+            }
+        }while (opcion!=0);
     }
 }
