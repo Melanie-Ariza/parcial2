@@ -27,8 +27,8 @@ public class Cliente extends Persona {
         return listaClienteVentas;
     }
 
-    public void setListaClienteVentas(List<Venta> listaVentas) {
-        this.listaClienteVentas = listaVentas;
+    public void setListaClienteVentas(List<Venta> listaClienteVentas) {
+        this.listaClienteVentas = listaClienteVentas;
     }
 
 //TOSTRING
