@@ -4,6 +4,7 @@ public class Prenda {
     private String marca;
     private double precioUnitario;
     private String color;
+    //Enums
     private Talla talla;
     private CategoriaPrenda categoriaPrenda;
 
