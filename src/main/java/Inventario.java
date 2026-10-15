@@ -43,8 +43,8 @@ public class Inventario {
     @Override
     public String toString() {
         return "Inventario\n" +
-                "Cantidad: " + cantidad +
-                ", Lista prendas: " + listaPrendas;
+                "Lista prendas: " + listaPrendas+
+                ", Cantidad: " + cantidad;
     }
 
     //Metodo mostrar nombres

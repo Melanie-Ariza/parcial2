@@ -22,8 +22,8 @@ public class DetalleVenta {
     @Override
     public String toString() {
         return "DetalleVenta\n" +
-                "Cantidad: " + cantidad+
-                ", Prenda: " + itemInventario.getNombresPrendas();
+                "Prenda: " + itemInventario.getNombresPrendas()+
+                ", Cantidad: " + cantidad;
     }
 
     //METODOS
