@@ -38,9 +38,8 @@ public class DetalleVenta {
     }
 
     // Calcular el subtotal
-    public double calcularSubtotal(Cliente cliente, Inventario itemInventario) {
+    public double calcularSubtotal(Cliente cliente) {
         double subtotalAcumulado = 0.0;
-
         for (Prenda prenda : itemInventario.getListaPrendas()) {
             double precioFinalUnitario = calcularValorUnitarioFinal(cliente, prenda);
 
