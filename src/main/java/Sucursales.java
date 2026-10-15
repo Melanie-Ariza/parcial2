@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Sucursales {
@@ -6,8 +8,10 @@ public class Sucursales {
     private String direccion;
     private String ciudad;
 
-    //Relacion sucursal inventario
+    //Relacion  inventario
     private Inventario inventario;
+    private List<Vendedor> listaVendedores;
+    private List<Venta> listaVentas;
 
     //Constructor
     public Sucursales(String nombre, String codigo, String direccion, String ciudad, Inventario inventario) {
@@ -16,6 +20,9 @@ public class Sucursales {
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.inventario = inventario;
+
+        listaVendedores= new ArrayList<>();
+        listaVentas= new ArrayList<>();
     }
     //get y set
     public String getNombre() {
@@ -58,7 +65,23 @@ public class Sucursales {
         this.inventario = inventario;
     }
 
-    //tostring
+    public List<Vendedor> getListaVendedores() {
+        return listaVendedores;
+    }
+
+    public void setListaVendedores(List<Vendedor> listaVendedores) {
+        this.listaVendedores = listaVendedores;
+    }
+
+    public List<Venta> getListaVentas() {
+        return listaVentas;
+    }
+
+    public void setListaVentas(List<Venta> listaVentas) {
+        this.listaVentas = listaVentas;
+    }
+
+//tostring
 
     @Override
     public String toString() {
@@ -67,23 +90,25 @@ public class Sucursales {
                 ", Código: " + codigo +
                 ", Dirección: " + direccion +
                 ", Ciudad: " + ciudad +
-                ", Inventario: " + inventario;
+                ", Inventario: " + inventario+
+                ", Lista vendedores: " + listaVendedores+
+                ", Lista ventas: " + listaVentas;
     }
 
     //Metodo para verificar si existe un inventario en la sucursal
-    public boolean verificarInventario(String codigo){
-        boolean existe= false;
-        if (inventario.getCodigo().equalsIgnoreCase(codigo)){
-            existe= true;
+    public boolean verificarInventario(String codigoInventario){
+        boolean existeInventario= false;
+        if (inventario.getCodigo().equalsIgnoreCase(codigoInventario)){
+            existeInventario= true;
         }
-        return existe;
+        return existeInventario;
     }
 
     //Metodo para crear un inventario
-    public void crearInventario(boolean existe){
+    public void crearInventario(boolean existeInventario, Inventario inventario){
         Scanner sc= new Scanner(System.in);
         boolean creado= false;
-        if (!existe){
+        if (!existeInventario){
             System.out.print("Código nuevo inventario: ");
             String codigo= sc.nextLine();
 
@@ -91,12 +116,57 @@ public class Sucursales {
             int cantidad= sc.nextInt();
             sc.nextLine();
 
-            Inventario inventario= new Inventario(codigo, cantidad);
+            inventario= new Inventario(codigo, cantidad);
+
 
             System.out.println("Inventario creado correctamente");
         }else {
             System.out.println("Inventario ya existente.");
         }
+    }
+
+    //Metodo para verificar vendedor
+    public boolean verificarVendedor(String codigoVendedor){
+        boolean existeVendedor= false;
+        for (Vendedor vendedor: listaVendedores){
+            if (vendedor.getCodigo().equalsIgnoreCase(codigoVendedor)){
+                existeVendedor= true;
+            }
+        }
+        return existeVendedor;
+    }
+
+    //Metodo agregar vendedor
+    public boolean agregarVendedor(Vendedor vendedor){
+        boolean vendedorAgregado= false;
+        boolean vendedorVerificado= verificarVendedor(vendedor.getCodigo());
+        if (!vendedorVerificado){
+            listaVendedores.add(vendedor);
+            vendedorAgregado= true;
+        }
+        return vendedorAgregado;
+    }
+
+    //Metodo verificar venta
+    public boolean verificarVenta(String codigoVenta){
+        boolean existeVenta= false;
+        for (Venta venta: listaVentas){
+            if (venta.getCodigo().equalsIgnoreCase(codigoVenta)){
+                existeVenta= true;
+            }
+        }
+        return existeVenta;
+    }
+
+    //Metodo agregar venta
+    public boolean agregarVenta(Venta venta){
+        boolean ventaAgregada= false;
+        boolean ventaVerificada= verificarVenta(venta.getCodigo());
+        if (!ventaVerificada){
+            listaVentas.add(venta);
+            ventaAgregada= true;
+        }
+        return ventaAgregada;
     }
 
 }

@@ -55,7 +55,7 @@ public class Inventario {
         }
         return nombres;
     }
-    // Método para verificar si ya existe la combinación de prenda (referencia, talla y color)
+    // Metodo para verificar si ya existe la combinación de prenda (referencia, talla y color)
     public boolean verificarCombinacionPrenda(String codigo, Talla talla, String color) {
         boolean existe = false;
         if (listaPrendas == null) {
@@ -75,7 +75,7 @@ public class Inventario {
 
         return existe;
     }
-    //Método Agregar Prenda
+    //Metodo Agregar Prenda
 
     public boolean agregarPrenda(Prenda prenda) {
         boolean prendaAgregada = false;
