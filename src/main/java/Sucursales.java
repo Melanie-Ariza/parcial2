@@ -67,4 +67,22 @@ public class Sucursales {
                 ", Ciudad: " + ciudad +
                 ", Inventario: " + inventario;
     }
+
+    //Metodo para verificar si existe un inventario en la sucursal
+    public boolean verificarInventario(){
+        boolean existe= false;
+        if (inventario.getCantidad()>0){
+            existe= true;
+        }
+        return existe;
+    }
+
+    //Metodo para crear un inventario
+    public boolean crearInventario(boolean existe){
+        boolean creado= false;
+        if (!existe){
+
+        }
+    }
+
 }

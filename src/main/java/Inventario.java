@@ -5,12 +5,12 @@ public class Inventario {
     private int cantidad;
 
     //Listas
-    private List<Prenda> listaInventarioPrendas;
+    private List<Prenda> listaPrendas;
 
     //Constructor
     public Inventario( int cantidad) {
         this.cantidad = cantidad;
-        listaInventarioPrendas = new ArrayList<>();
+        listaPrendas = new ArrayList<>();
 
     }
     //GETSET
@@ -19,12 +19,12 @@ public class Inventario {
     public void setCantidad(int cantidad) {this.cantidad = cantidad;}
 
 
-    public List<Prenda> getListaInventarioPrendas() {
-        return listaInventarioPrendas;
+    public List<Prenda> getListaPrendas() {
+        return listaPrendas;
     }
 
     public void setListaInventarioPrendas(List<Prenda> listaInventarioPrendas) {
-        this.listaInventarioPrendas = listaInventarioPrendas;
+        this.listaPrendas = listaInventarioPrendas;
     }
 
     //toString
@@ -33,13 +33,13 @@ public class Inventario {
     public String toString() {
         return "Inventario\n" +
                 "Cantidad: " + cantidad +
-                ", Lista prendas: " + listaInventarioPrendas;
+                ", Lista prendas: " + listaPrendas;
     }
 
     //Metodo mostrar nombres
     public List<String> getNombresPrendas() {
         List<String> nombres = new ArrayList<>();
-        for (Prenda prenda : this.listaInventarioPrendas) {
+        for (Prenda prenda : this.listaPrendas) {
             nombres.add(prenda.getNombre());
         }
         return nombres;
@@ -47,11 +47,11 @@ public class Inventario {
     // Método para verificar si ya existe la combinación de prenda (referencia, talla y color)
     public boolean verificarCombinacionPrenda(String codigo, Talla talla, String color) {
         boolean existe = false;
-        if (listaInventarioPrendas == null) {
+        if (listaPrendas == null) {
             return existe;
         }
 
-        for (Prenda prenda : listaInventarioPrendas) {
+        for (Prenda prenda : listaPrendas) {
             boolean mismoCodigo = prenda.getCodigo().equalsIgnoreCase(codigo);
             boolean mismaTalla = prenda.getTalla() == talla;
             boolean mismoColor = prenda.getColor().equalsIgnoreCase(color);
@@ -71,7 +71,7 @@ public class Inventario {
         boolean prendaVerificada = verificarCombinacionPrenda(prenda.getCodigo(), prenda.getTalla(), prenda.getColor());
 
         if (!prendaVerificada) {
-            listaInventarioPrendas.add(prenda);
+            listaPrendas.add(prenda);
             prendaAgregada = true;
         }
 
