@@ -7,7 +7,6 @@ public class DetalleVenta {
         this.cantidad = cantidad;
     }
     //GETSET
-
     public Inventario getItemInventario() {return itemInventario;}
 
     public void setItemInventario(Inventario itemInventario) {this.itemInventario = itemInventario;}

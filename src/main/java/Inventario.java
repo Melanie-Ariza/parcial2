@@ -35,15 +35,6 @@ public class Inventario {
                 ", Lista prendas: " + listaPrendas;
     }
 
-    // METODOSTOCK
-    public boolean hayStockSuficiente(int cantidadSolicitada) {
-        return this.cantidad >= cantidadSolicitada;
-    }
-
-    public void descontarStock(int cantidadVendida) {
-        this.cantidad -= cantidadVendida;
-    }
-
     //Metodo mostrar nombres
     public List<String> getNombresPrendas() {
         List<String> nombres = new ArrayList<>();
