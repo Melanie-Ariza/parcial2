@@ -55,6 +55,7 @@ public class Inventario {
         }
         return nombres;
     }
+
     // Metodo para verificar si ya existe la combinación de prenda (referencia, talla y color)
     public boolean verificarCombinacionPrenda(String codigo, Talla talla, String color) {
         boolean existe = false;

@@ -42,7 +42,8 @@ public class Vendedor extends Persona {
     //TOSTRING
     @Override
     public String toString() {
-        return "Vendedor: " + super.toString() +
+        return "Vendedor: " +
+                super.toString() +
                 ", documento: " + getDocumento() +
                 ", nombre: " + getNombre() +
                 ", codigo: " + codigo +
