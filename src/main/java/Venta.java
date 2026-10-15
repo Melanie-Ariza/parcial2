@@ -50,13 +50,11 @@ public class Venta {
     }
 
     // Calcular precio final
-    public double calcularValorTotal(Cliente cliente, Inventario itemInventario){
+    public double calcularValorTotal(Cliente cliente){
         double valorFinal=0;
         for (DetalleVenta detalleVenta: listaDetallesVenta){
-            valorFinal+= detalleVenta.calcularSubtotal(cliente, itemInventario);
+            valorFinal+= detalleVenta.calcularSubtotal(cliente);
         }
-        valorFinal= valorFinal*(1-cliente.getCategoria().getDescuento());
-
         return valorFinal;
     }
 }
