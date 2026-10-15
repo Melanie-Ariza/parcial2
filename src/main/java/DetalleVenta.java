@@ -1,16 +1,12 @@
 public class DetalleVenta {
-    private Inventario itemInventario;
     private int cantidad;
+    private Inventario itemInventario;
 
-    public DetalleVenta(Inventario itemInventario, int cantidad) {
-        this.itemInventario = itemInventario;
+    public DetalleVenta(int cantidad, Inventario itemInventario) {
         this.cantidad = cantidad;
+        this.itemInventario = itemInventario;
     }
     //GETSET
-    public Inventario getItemInventario() {return itemInventario;}
-
-    public void setItemInventario(Inventario itemInventario) {this.itemInventario = itemInventario;}
-
     public int getCantidad() {
         return cantidad;
     }
@@ -19,11 +15,15 @@ public class DetalleVenta {
         this.cantidad = cantidad;
     }
 
+    public Inventario getItemInventario() {return itemInventario;}
+
+    public void setItemInventario(Inventario itemInventario) {this.itemInventario = itemInventario;}
+
     @Override
     public String toString() {
-        return "DetalleVenta=" +
-                "prenda: " + itemInventario.getNombresPrendas()+
-                ", cantidad: " + cantidad;
+        return "DetalleVenta\n" +
+                "Cantidad: " + cantidad+
+                ", Prenda: " + itemInventario.getNombresPrendas();
     }
 
     //METODOS
