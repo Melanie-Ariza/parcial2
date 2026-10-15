@@ -8,6 +8,7 @@ public class Empresa {
 
     //Lista sucursales
     private List<Sucursales> listaSucursales;
+    private List<Cliente> listaClientes;
 
     //Constructor
     public Empresa(String nombre, String nit, String direccion) {
@@ -15,7 +16,8 @@ public class Empresa {
         this.nit = nit;
         this.direccion = direccion;
 
-        listaSucursales= new ArrayList<>();
+        listaSucursales = new ArrayList<>();
+        listaClientes = new ArrayList<>();
     }
 
     //Get y set
@@ -51,6 +53,13 @@ public class Empresa {
         this.listaSucursales = listaSucursales;
     }
 
+    public List<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+
+    public void setListaClientes(List<Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
+    }
     //toString
 
     @Override
@@ -59,6 +68,49 @@ public class Empresa {
                 "Nombre: " + nombre +
                 ", NIT: " + nit +
                 ", Dirección: " + direccion +
-                ", Lista sucursales: " + listaSucursales;
+                ", Cantidad Sucursales: " + listaSucursales.size() +
+                ", Cantidad Clientes: " + listaClientes.size();
+    }
+
+    //Metodos
+    //verificarSucursal
+    public boolean verificarSucursal(String codigo) {
+        for (Sucursales sucursal : this.listaSucursales) {
+            if (sucursal.getCodigo().equalsIgnoreCase(codigo)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    //AgregarSucursal
+    public boolean agregarSucursal(Sucursales nuevaSucursal) {
+        if (!verificarSucursal(nuevaSucursal.getCodigo())) {
+            this.listaSucursales.add(nuevaSucursal);
+            return true;
+        } else {
+            System.out.println("Error: La sucursal con código " + nuevaSucursal.getCodigo() + " ya existe.");
+            return false;
+        }
+    }
+    //VerificarCliente
+    public boolean verificarClientes(String codigoCliente) {
+        for (Cliente cliente : this.listaClientes) {
+            if (cliente.getCodigo().equalsIgnoreCase(codigoCliente)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //AgregarCliente
+    public boolean agregarClientes(Cliente nuevoCliente) {
+        if (!verificarClientes(nuevoCliente.getCodigo())) {
+            this.listaClientes.add(nuevoCliente);
+            return true;
+        } else {
+            System.out.println("Error: El cliente ya está registrado.");
+            return false;
+        }
     }
 }
