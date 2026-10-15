@@ -64,6 +64,30 @@ public class Inventario {
 
         return existe;
     }
+    //Método Agregar Prenda
+
+    public boolean agregarPrenda(Prenda prenda) {
+        boolean prendaAgregada = false;
+        boolean prendaVerificada = verificarCombinacionPrenda(prenda.getCodigo(), prenda.getTalla(), prenda.getColor());
+
+        if (!prendaVerificada) {
+            listaInventarioPrendas.add(prenda);
+            prendaAgregada = true;
+        }
+
+        return prendaAgregada;
+    }
+
+    //Validar Stock
+    public boolean validarStock(int cantidadSolicitada) {
+        boolean stockValido = false;
+
+        if (cantidad >= cantidadSolicitada) {
+            stockValido = true;
+        }
+
+        return stockValido;
+    }
 
 }
 
