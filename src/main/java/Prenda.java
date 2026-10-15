@@ -4,16 +4,18 @@ public class Prenda {
     private String marca;
     private double precioUnitario;
     private String color;
+    private int cantidad;
     //Enums
     private Talla talla;
     private CategoriaPrenda categoriaPrenda;
 
-    public Prenda(String codigo, String nombre, String marca, double precioUnitario, String color, Talla talla, CategoriaPrenda categoriaPrenda) {
+    public Prenda(String codigo, String nombre, String marca, double precioUnitario, String color, int cantidad, Talla talla, CategoriaPrenda categoriaPrenda) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.marca = marca;
         this.precioUnitario = precioUnitario;
         this.color = color;
+        this.cantidad = cantidad;
         this.talla = talla;
         this.categoriaPrenda = categoriaPrenda;
     }
@@ -66,6 +68,10 @@ public class Prenda {
         this.color = color;
     }
 
+    public int getCantidad() {return cantidad;}
+
+    public void setCantidad(int cantidad) {this.cantidad = cantidad;}
+
     public Talla getTalla() {
         return talla;
     }
@@ -82,6 +88,7 @@ public class Prenda {
                 ", marca: " + marca +
                 ", precioUnitario: " + precioUnitario +
                 ", color: " + color +
+                ", cantidad: " + cantidad +
                 ", talla: " + talla +
                 ", categoriaPrenda " + categoriaPrenda;
     }
