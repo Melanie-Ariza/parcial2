@@ -4,15 +4,13 @@ import java.util.List;
 public class Cliente extends Persona {
     private String codigo;
     private CategoriaCliente categoria;
-
-    private List<Venta> listaCompras;
+    private List<Venta> listaClienteVentas;
 
     public Cliente(int documento, String nombre, String correo, String telefono, String codigo, CategoriaCliente categoria) {
         super(documento, nombre, correo, telefono);
         this.codigo = codigo;
         this.categoria = categoria;
-
-        listaCompras= new ArrayList<>();
+        listaClienteVentas = new ArrayList<Venta>();
     }
 
     //GETSET
@@ -24,27 +22,51 @@ public class Cliente extends Persona {
 
     public CategoriaCliente getCategoria() { return categoria; }
 
-    public List<Venta> getListaCompras() {
-        return listaCompras;
+
+    public List<Venta> getListaClienteVentas() {
+        return listaClienteVentas;
     }
 
-    public void setListaCompras(List<Venta> listaCompras) {
-        this.listaCompras = listaCompras;
+    public void setListaClienteVentas(List<Venta> listaClienteVentas) {
+        this.listaClienteVentas = listaClienteVentas;
     }
 
 //TOSTRING
 
+
     @Override
     public String toString() {
-        // super.getNombre() para incluir los datos heredados de Persona y asi
-        return "Cliente \n" +
-                "Documento: " + getDocumento() +
-                ", Nombre: " + getNombre() +
-                ", Correo: " + getCorreo() +
-                ", Telefono: " + getTelefono() +
-                ", Codigo: " + codigo  +
-                ", Categoria: " + categoria+
-                ", Lista compras: "+ listaCompras;
+        return "Cliente: " + super.toString() +
+                ", codigo" + codigo +
+                ", categoria: " + categoria +
+                ", listaVentas: " + listaClienteVentas;
     }
+
+    //Metodos
+
+    //Verificar Compra
+    public boolean verificarCompra(String codigo){
+        boolean verificado = false;
+        for(Venta venta : listaClienteVentas){
+            if(venta.getCodigo().equalsIgnoreCase(codigo)){
+                verificado = true;
+                break;
+            }
+        }
+        return verificado;
+    }
+
+    //Agregar Compra
+    public boolean agregarCompra(Venta venta){
+        boolean compraAgregada = false;
+        boolean compraVerificada = verificarCompra(venta.getCodigo());
+        if(!compraVerificada){
+            listaClienteVentas.add(venta);
+            compraAgregada = true;
+        }
+        return compraAgregada;
+    }
+
+
 }
 

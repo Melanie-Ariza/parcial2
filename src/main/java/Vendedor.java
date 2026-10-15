@@ -7,7 +7,7 @@ public class Vendedor extends Persona {
     private LocalDate fechaContrato;
     private double salario;
 
-    private List<Venta> listaVentas;
+    private List<Venta> listaVendedorVentas;
 
     public Vendedor(int documento, String nombre, String correo, String telefono, String codigo, LocalDate fechaContrato, double salario) {
         super(documento, nombre, correo, telefono);
@@ -15,7 +15,7 @@ public class Vendedor extends Persona {
         this.fechaContrato = fechaContrato;
         this.salario = salario;
 
-        listaVentas= new ArrayList<>();
+        listaVendedorVentas= new ArrayList<>();
     }
 
     //GETSET
@@ -31,25 +31,51 @@ public class Vendedor extends Persona {
 
     public void setSalario(double salario) {this.salario = salario;}
 
-    public List<Venta> getListaVentas() {
-        return listaVentas;
+    public List<Venta> getListaVendedorVentas() {
+        return listaVendedorVentas;
     }
 
-    public void setListaVentas(List<Venta> listaVentas) {
-        this.listaVentas = listaVentas;
+    public void setListaVendedorVentas(List<Venta> listaVendedorVentas) {
+        this.listaVendedorVentas = listaVendedorVentas;
     }
 
     //TOSTRING
     @Override
     public String toString() {
-        return "Vendedor \n" +
-                "documento: " + getDocumento() +
+        return "Vendedor: " + super.toString() +
+                ", documento: " + getDocumento() +
                 ", nombre: " + getNombre() +
                 ", codigo: " + codigo +
                 ", fechaContrato: " + fechaContrato +
                 ", salario: " + salario+
-                ", Lista ventas: "+ listaVentas;
+                ", Lista ventas: "+ listaVendedorVentas;
 
+    }
+
+    //Metodos
+    // 1. Verificar Venta
+    public boolean verificarVenta(String codigo) {
+        boolean verificado = false;
+        for (Venta venta : listaVendedorVentas) {
+            if (venta.getCodigo().equalsIgnoreCase(codigo)) {
+                verificado = true;
+                break;
+            }
+        }
+        return verificado;
+    }
+
+    // 2. Crear Venta
+    public boolean crearVenta(Venta venta) {
+        boolean ventaCreada = false;
+        boolean ventaVerificada = verificarVenta(venta.getCodigo());
+
+        if (!ventaVerificada) {
+            listaVendedorVentas.add(venta);
+            ventaCreada = true;
+        }
+
+        return ventaCreada;
     }
 }
 
