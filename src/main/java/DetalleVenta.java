@@ -28,18 +28,17 @@ public class DetalleVenta {
     }
 
     //METODOS
-    // 1. Calcular el valor unitario final aplicando el recargo de la prenda
+    // Calcular el valor unitario final aplicando el recargo de la prenda
     public double calcularValorUnitarioFinal(Cliente cliente, Prenda prenda) {
         double precioBase = prenda.getPrecioUnitario();
         double recargo = prenda.calcularSobrecargo();
         double precioConRecargo = precioBase + recargo;
 
         double descuentoCliente = cliente.getCategoria().getDescuento();
-
         return precioConRecargo * (1 - descuentoCliente);
     }
 
-    // 2. Calcular el subtotal
+    // Calcular el subtotal
     public double calcularSubtotal(Cliente cliente, Inventario itemInventario) {
         double subtotalAcumulado = 0.0;
 
