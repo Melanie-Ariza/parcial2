@@ -84,6 +84,7 @@ public class Aplicacion {
             System.out.println("10. Consultar compras por cliente.");
             System.out.println("11. Calcular ingresos totales por sucursal.");
             System.out.println("12. Consultar prenda más vendida.");
+            System.out.println("13. Registrar sucursal.");
             System.out.println("0. Salir.");
 
             System.out.print("Ingrese una opción: ");
@@ -127,6 +128,9 @@ public class Aplicacion {
                     break;
                 case 12:
                     System.out.println("======= Consultar prenda más vendida =======");
+                    break;
+                case 13:
+                    System.out.println("======= Registrar sucursal =======");
                     break;
                 default:
                     System.out.println("Proceso finalizado, muchas gracias.");
