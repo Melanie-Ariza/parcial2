@@ -89,7 +89,7 @@ public double calcularSobrecargo() {
     if (this.categoriaPrenda == null) {
         return 0.0;
     }
-    return precioUnitario * categoriaPrenda.getCalcularSobreCargo();
+    return precioUnitario * categoriaPrenda.getSobrecargo();
 }
 
 }
