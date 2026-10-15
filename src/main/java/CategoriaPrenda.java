@@ -5,11 +5,11 @@ public enum CategoriaPrenda {
     CHAQUETA(0.15),
     CALZADO(0.05);
 
-    private double calcularSobreCargo;
+    private double sobrcargo;
 
-    CategoriaPrenda(double calcularSobreCargo) {
-        this.calcularSobreCargo = calcularSobreCargo;
+    CategoriaPrenda(double sobrcargo) {
+        this.sobrcargo= sobrcargo;
     }
 
-    public double getCalcularSobreCargo() {return calcularSobreCargo;}
+    public double getSobrecargo() {return sobrcargo;}
 }
