@@ -7,7 +7,7 @@ public class Empresa {
     private String direccion;
 
     //Lista sucursales
-    private List<Sucursales> listaSucursales;
+    private List<Sucursal> listaSucursales;
     private List<Cliente> listaClientes;
 
     //Constructor
@@ -45,11 +45,11 @@ public class Empresa {
         this.direccion = direccion;
     }
 
-    public List<Sucursales> getListaSucursales() {
+    public List<Sucursal> getListaSucursales() {
         return listaSucursales;
     }
 
-    public void setListaSucursales(List<Sucursales> listaSucursales) {
+    public void setListaSucursales(List<Sucursal> listaSucursales) {
         this.listaSucursales = listaSucursales;
     }
 
@@ -75,7 +75,7 @@ public class Empresa {
     //Metodos
     //verificarSucursal
     public boolean verificarSucursal(String codigo) {
-        for (Sucursales sucursal : this.listaSucursales) {
+        for (Sucursal sucursal : this.listaSucursales) {
             if (sucursal.getCodigo().equalsIgnoreCase(codigo)) {
                 return true;
             }
@@ -85,7 +85,7 @@ public class Empresa {
     }
 
     //AgregarSucursal
-    public boolean agregarSucursal(Sucursales nuevaSucursal) {
+    public boolean agregarSucursal(Sucursal nuevaSucursal) {
         if (!verificarSucursal(nuevaSucursal.getCodigo())) {
             this.listaSucursales.add(nuevaSucursal);
             return true;

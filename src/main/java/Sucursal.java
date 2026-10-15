@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Sucursales {
+public class Sucursal {
     private String nombre;
     private String codigo;
     private String direccion;
@@ -14,7 +14,7 @@ public class Sucursales {
     private List<Venta> listaVentas;
 
     //Constructor
-    public Sucursales(String nombre, String codigo, String direccion, String ciudad, Inventario inventario) {
+    public Sucursal(String nombre, String codigo, String direccion, String ciudad, Inventario inventario) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.direccion = direccion;
