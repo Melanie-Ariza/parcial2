@@ -2,18 +2,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventario {
+    private String codigo;
     private int cantidad;
 
     //Listas
     private List<Prenda> listaPrendas;
 
     //Constructor
-    public Inventario( int cantidad) {
+    public Inventario(String codigo, int cantidad) {
+        this.codigo=codigo;
         this.cantidad = cantidad;
         listaPrendas = new ArrayList<>();
 
     }
     //GETSET
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public int getCantidad() {return cantidad;}
 
     public void setCantidad(int cantidad) {this.cantidad = cantidad;}
@@ -23,7 +34,7 @@ public class Inventario {
         return listaPrendas;
     }
 
-    public void setListaInventarioPrendas(List<Prenda> listaInventarioPrendas) {
+    public void setListaPrendas(List<Prenda> listaInventarioPrendas) {
         this.listaPrendas = listaInventarioPrendas;
     }
 

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Sucursales {
     private String nombre;
     private String codigo;
@@ -69,19 +71,31 @@ public class Sucursales {
     }
 
     //Metodo para verificar si existe un inventario en la sucursal
-    public boolean verificarInventario(){
+    public boolean verificarInventario(String codigo){
         boolean existe= false;
-        if (inventario.getCantidad()>0){
+        if (inventario.getCodigo().equalsIgnoreCase(codigo)){
             existe= true;
         }
         return existe;
     }
 
     //Metodo para crear un inventario
-    public boolean crearInventario(boolean existe){
+    public void crearInventario(boolean existe){
+        Scanner sc= new Scanner(System.in);
         boolean creado= false;
         if (!existe){
+            System.out.print("Código nuevo inventario: ");
+            String codigo= sc.nextLine();
 
+            System.out.print("Cantidad nuevo inventario: ");
+            int cantidad= sc.nextInt();
+            sc.nextLine();
+
+            Inventario inventario= new Inventario(codigo, cantidad);
+
+            System.out.println("Inventario creado correctamente");
+        }else {
+            System.out.println("Inventario ya existente.");
         }
     }
 
