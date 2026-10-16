@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Aplicacion {
@@ -273,20 +275,1131 @@ public class Aplicacion {
                 case 8:
                     System.out.println("======= Consultar prendas agotadas =======");
                     break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 case 9:
                     System.out.println("======= Consultar ventas por vendedor =======");
+                    System.out.print("Ingrese el código del vendedor: ");
+                    String codigoVendedor = sc.nextLine();
+
+                    boolean vendedorEncontrado = false;
+                    Vendedor vendedorSeleccionado = null;
+
+                    // Buscar el vendedor en las sucursales
+                    for (Sucursal sucursal : empresa.getListaSucursales()) {
+                        for (Vendedor vendedor : sucursal.getListaVendedores()) {
+                            if (vendedor.getCodigo().equalsIgnoreCase(codigoVendedor)) {
+                                vendedorEncontrado = true;
+                                vendedorSeleccionado = vendedor;
+                                break;
+                            }
+                        }
+                        if (vendedorEncontrado) {
+                            break;
+                        }
+                    }
+
+                    if (vendedorEncontrado) {
+                        System.out.println("Vendedor: " + vendedorSeleccionado.getNombre());
+
+                        // Verificación manual de si la lista tiene elementos
+                        boolean tieneVentas = false;
+                        for (Venta venta : vendedorSeleccionado.getListaVendedorVentas()) {
+                            tieneVentas = true;
+                            break;
+                        }
+
+                        if (tieneVentas = true) {
+                            System.out.println("Ventas realizadas:");
+                            for (Venta venta : vendedorSeleccionado.getListaVendedorVentas()) {
+                                System.out.println(venta);
+                            }
+                        } else {
+                            System.out.println("El vendedor no tiene ventas registradas");
+                        }
+                    } else {
+                        System.out.println("El Vendedor no existe");
+                    }
                     break;
+
+
                 case 10:
                     System.out.println("======= Consultar compras por cliente =======");
+                    System.out.print("Ingrese el código del cliente: ");
+                    String codigoCliente = sc.nextLine();
+
+                    boolean clienteEncontrado = false;
+                    Cliente clienteSeleccionado = null;
+
+                    // Buscar cliente
+                    for (Cliente cliente : empresa.getListaClientes()) {
+                        if (cliente.getCodigo().equalsIgnoreCase(codigoCliente)) {
+                            clienteEncontrado = true;
+                            clienteSeleccionado = cliente;
+                            break;
+                        }
+                    }
+
+                    if (clienteEncontrado) {
+                        System.out.println("Cliente: " + clienteSeleccionado.getNombre());
+
+                        // Verificar si la lista tiewane elementos
+                        boolean tieneCompras = false;
+                        for (Venta venta : clienteSeleccionado.getListaCompras()) {
+                            tieneCompras = true;
+                            break;
+                        }
+
+                        if (tieneCompras) {
+                            System.out.println("Historial de compras:");
+                            for (Venta venta : clienteSeleccionado.getListaCompras()) {
+                                System.out.println(venta);
+                                System.out.println("Monto total: $" + venta.calcularValorTotal(clienteSeleccionado));
+                            }
+                        } else {
+                            System.out.println("El cliente no ha realizado compras.");
+                        }
+                    } else {
+                        System.out.println("El cliente no existe.");
+                    }
                     break;
+
+
                 case 11:
                     System.out.println("======= Calcular ingresos totales por sucursal =======");
+                    System.out.print("Ingrese el código de la sucursal: ");
+                    String codigoSucursal = sc.nextLine();
+
+                    boolean sucursalEncontrada = false;
+                    Sucursal sucursalSeleccionada = null;
+
+                    // Buscar la sucursal
+                    for (Sucursal sucursal : empresa.getListaSucursales()) {
+                        if (sucursal.getCodigo().equalsIgnoreCase(codigoSucursal)) {
+                            sucursalEncontrada = true;
+                            sucursalSeleccionada = sucursal;
+                            break;
+                        }
+                    }
+
+                    if (sucursalEncontrada) {
+                        double ingresosTotales = 0.0;
+
+                        for (Venta venta : sucursalSeleccionada.getListaVentas()) {
+                            boolean clienteCalculado = false;
+
+                            // Buscar q cliente hizo esta venta para aplicar descuento
+                            for (Cliente cliente : empresa.getListaClientes()) {
+                                for (Venta compraCliente : cliente.getListaCompras()) {
+                                    if (compraCliente.getCodigo().equalsIgnoreCase(venta.getCodigo())) {
+                                        ingresosTotales += venta.calcularValorTotal(cliente);
+                                        clienteCalculado = true;
+                                        break;
+                                    }
+                                }
+                                if (clienteCalculado) {
+                                    break;
+                                }
+                            }
+
+                            // Si la venta no pertenece a ningun cliente de la lista, sumar el valor base sin descuento
+                            if (!clienteCalculado) {
+                                for (DetalleVenta detalleVenta : venta.getListaDetallesVenta()) {
+                                    for (Prenda prenda : detalleVenta.getItemInventario().getListaPrendas()) {
+                                        double precioConRecargo = prenda.getPrecioUnitario() + prenda.calcularSobrecargo();
+                                        ingresosTotales += precioConRecargo * detalleVenta.getCantidad();
+                                    }
+                                }
+                            }
+                        }
+
+                        System.out.println("Sucursal: " + sucursalSeleccionada.getNombre());
+                        System.out.println("Ingresos totales: $" + ingresosTotales);
+                    } else {
+                        System.out.println("La sucural no existe.");
+                    }
                     break;
+
+
                 case 12:
-                    System.out.println("======= Consultar prenda más vendida =======");
+                    // 1. Obtener todas las prendas del sistema con una lista
+                    List<Prenda> prendasExistentes = new ArrayList<>();
+
+                    for (Sucursal sucursal : empresa.getListaSucursales()) {
+                        for (Venta venta : sucursal.getListaVentas()) {
+                            for (DetalleVenta detalleVenta : venta.getListaDetallesVenta()) {
+                                for (Prenda prenda : detalleVenta.getItemInventario().getListaPrendas()) {
+
+                                    // Verificar si la prenda ya está en la lista
+                                    boolean yaExisteEnLista = false;
+                                    for (Prenda registrada : prendasExistentes) {
+                                        if (registrada.getCodigo().equalsIgnoreCase(prenda.getCodigo())) {
+                                            yaExisteEnLista = true;
+                                            break;
+                                        }
+                                    }
+
+                                    // Si no está, se agrega
+                                    if (!yaExisteEnLista) {
+                                        prendasExistentes.add(prenda);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // 2. Verificar si hay prwndas vendidas
+                    boolean existenVentas = false;
+                    for (Prenda prenda : prendasExistentes) {
+                        existenVentas = true;
+                        break;
+                    }
+
+                    if (existenVentas) {
+                        Prenda prendaMasVendida = null;
+                        int maxCantidad = -1;
+
+                        // 3. Para cada prenda se suman las cantidades vendidas en todas las sucursales
+                        for (Prenda prenda : prendasExistentes) {
+                            int totalVentasPrendaActual = 0;
+
+                            for (Sucursal sucursal : empresa.getListaSucursales()) {
+                                for (Venta venta : sucursal.getListaVentas()) {
+                                    for (DetalleVenta detalleVenta : venta.getListaDetallesVenta()) {
+                                        for (Prenda prendaDetalle : detalleVenta.getItemInventario().getListaPrendas()) {
+                                            if (prendaDetalle.getCodigo().equalsIgnoreCase(prenda.getCodigo())) {
+                                                totalVentasPrendaActual += detalleVenta.getCantidad();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Comparar si esta prenda supera el récord máximo q ya hay
+                            if (totalVentasPrendaActual > maxCantidad) {
+                                maxCantidad = totalVentasPrendaActual;
+                                prendaMasVendida = prenda;
+                            }
+                        }
+
+                        System.out.println("Prenda más vendida: " + prendaMasVendida.getNombre() + ", Código: " + prendaMasVendida.getCodigo());
+                        System.out.println("Unidades vendidas: " + maxCantidad);
+
+                    } else {
+                        System.out.println("No se han registrado ventas en el sistema.");
+                    }
                     break;
                 case 13:
                     System.out.println("======= Registrar sucursal =======");
+
+                    System.out.print("Ingrese el nombre de la sucursal: ");
+                    String nombreSucursal = sc.nextLine();
+
+                    System.out.print("Ingrese el código de la sucursal: ");
+                    String codSucursal = sc.nextLine();
+
+                    System.out.print("Ingrese la dirección: ");
+                    String direccionSucursal = sc.nextLine();
+
+                    System.out.print("Ingrese la ciudad: ");
+                    String ciudadSucursal = sc.nextLine();
+
+                    System.out.print("Ingrese el código para el inventario: ");
+                    String codigoInventario = sc.nextLine();
+
+                    System.out.print("Ingrese la cantidad inicial del inventario: ");
+                    int cantidadInventario = sc.nextInt();
+                    sc.nextLine();
+
+                    // Instanciar objetos
+                    Inventario nuevoInventario = new Inventario(codigoInventario, cantidadInventario);
+                    Sucursal nuevaSucursal = new Sucursal(nombreSucursal, codSucursal, direccionSucursal, ciudadSucursal, nuevoInventario);
+
+                    boolean sucursalRegistrada = empresa.agregarSucursal(nuevaSucursal);
+
+                    if (sucursalRegistrada) {
+                        System.out.println("Sucursal registrada exitosamente.");
+                    } else {
+                        System.out.println("No se pudo registrar la sucursal (Código de sucursal yw existente)");
+                    }
                     break;
                 default:
                     System.out.println("Proceso finalizado, muchas gracias.");
