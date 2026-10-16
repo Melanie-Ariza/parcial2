@@ -144,6 +144,11 @@ public class Empresa {
         Scanner sc= new Scanner(System.in);
         int opcion=1;
         Venta venta1= null;
+        System.out.print("Ingrese nuevo código compra: ");
+        String codigo= sc.nextLine();
+
+        LocalDate fechaCompra = LocalDate.now();
+        Venta nuevaVenta= new Venta(codigo, fechaCompra);
 
         do {
             for (Inventario inventario: listaInventarios){
@@ -189,16 +194,9 @@ public class Empresa {
             System.out.println("¿Desea continuar comprando? (1: Sí / 2: No)");
             opcion = sc.nextInt();
             sc.nextLine();
-        }while (opcion!=2);
-        double valorTotal= venta1.calcularValorTotal(cliente);
+        }while (opcion!=2 && opcion==1);
+        double valorTotal= nuevaVenta.calcularValorTotal(cliente);
         System.out.println("Valor total: " + valorTotal);
-
-        System.out.print("Ingrese nuevo código compra: ");
-        String codigo= sc.nextLine();
-
-        LocalDate fechaCompra = LocalDate.now();
-
-        Venta nuevaVenta= new Venta(codigo, fechaCompra);
     }
 
     //Metodo para mostrar sucursal por codigo
