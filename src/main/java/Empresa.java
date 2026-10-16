@@ -151,12 +151,6 @@ public class Empresa {
         Venta nuevaVenta= new Venta(codigo, fechaCompra);
 
         do {
-            for (Inventario inventario: listaInventarios){
-                for (Prenda prenda: inventario.getListaPrendas()) {
-                    System.out.println(prenda);
-                }
-            }
-
             System.out.print("Ingrese el código de prenda que desea: ");
             String codigoPrenda= sc.nextLine();
 
