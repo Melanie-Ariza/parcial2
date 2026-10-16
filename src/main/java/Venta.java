@@ -63,7 +63,7 @@ public class Venta {
     public double calcularValorTotal(Cliente cliente){
         double valorFinal=0;
         for (DetalleVenta detalleVenta: listaDetallesVenta){
-            valorFinal+= detalleVenta.calcularSubtotal(cliente);
+            valorFinal += detalleVenta.calcularSubtotal(cliente);
         }
         return valorFinal;
     }

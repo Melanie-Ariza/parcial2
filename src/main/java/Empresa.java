@@ -140,127 +140,63 @@ public class Empresa {
     }
 
     //Registrar una venta
-    public void comenzarCompra(Cliente cliente) {
-        Scanner sc = new Scanner(System.in);
+    public void comenzarCompra (Cliente cliente){
+        Scanner sc= new Scanner(System.in);
+        int opcion=1;
+        Venta venta1= null;
+        System.out.print("Ingrese nuevo código compra: ");
+        String codigo= sc.nextLine();
 
-        if (listaSucursales.isEmpty()) {
-            System.out.println("No hay sucursales registradas.");
-            return;
-        }
-
-        // 1. Seleccionar la sucursal donde se realiza la compra
-        System.out.println("--- Seleccione la Sucursal ---");
-        for (int i = 0; i < listaSucursales.size(); i++) {
-            Sucursal suc = listaSucursales.get(i);
-            System.out.println((i + 1) + ". " + suc.getNombre() + " (" + suc.getCiudad() + ")");
-        }
-        System.out.print("Ingrese el número de la sucursal: ");
-        int opcionSucursal = sc.nextInt();
-        sc.nextLine();
-
-        if (opcionSucursal < 1 || opcionSucursal > listaSucursales.size()) {
-            System.out.println("Opción de sucursal inválida.");
-            return;
-        }
-
-        Sucursal sucursalSeleccionada = listaSucursales.get(opcionSucursal - 1);
-        Inventario inventarioSucursal = sucursalSeleccionada.getInventario();
-
-        // 2. Registrar/Validar el Vendedor atendiendo la compra
-        if (sucursalSeleccionada.getListaVendedores().isEmpty()) {
-            System.out.println("Error: Esta sucursal no tiene vendedores registrados.");
-            return;
-        }
-
-        System.out.println("\n--- Vendedores Disponibles en la Sucursal ---");
-        for (Vendedor v : sucursalSeleccionada.getListaVendedores()) {
-            System.out.println(" - " + v.getNombre() + " (Código: " + v.getCodigo() + ")");
-        }
-
-        System.out.print("Ingrese el código del vendedor que atiende la compra: ");
-        String codigoVendedor = sc.nextLine();
-
-        Vendedor vendedorAtendiendo = null;
-        for (Vendedor v : sucursalSeleccionada.getListaVendedores()) {
-            if (v.getCodigo().equalsIgnoreCase(codigoVendedor)) {
-                vendedorAtendiendo = v;
-                break;
-            }
-        }
-
-        if (vendedorAtendiendo == null) {
-            System.out.println("Error: El vendedor con código '" + codigoVendedor + "' no pertenece a esta sucursal.");
-            return;
-        }
-
-        // 3. Pedir el código de compra e instanciar la Venta
-        System.out.print("Ingrese el código para la nueva compra: ");
-        String codigoVenta = sc.nextLine();
-
-        Venta nuevaVenta = new Venta(codigoVenta, LocalDate.now());
-        nuevaVenta.setVendedor(vendedorAtendiendo); // Asociar vendedor a la venta
-
-        int opcion = 1;
+        LocalDate fechaCompra = LocalDate.now();
+        Venta nuevaVenta= new Venta(codigo, fechaCompra);
 
         do {
-            System.out.println("\n--- Catálogo de Prendas Disponibles ---");
-            for (Prenda prenda : inventarioSucursal.getListaPrendas()) {
-                System.out.println(prenda);
-            }
-
-            System.out.print("\nIngrese el código de prenda que desea comprar: ");
-            String codigoPrenda = sc.nextLine();
-
-            Prenda prendaEncontrada = null;
-            for (Prenda prenda : inventarioSucursal.getListaPrendas()) {
-                if (prenda.getCodigo().equalsIgnoreCase(codigoPrenda)) {
-                    prendaEncontrada = prenda;
-                    break;
+            for (Inventario inventario: listaInventarios){
+                for (Prenda prenda: inventario.getListaPrendas()) {
+                    System.out.println(prenda);
                 }
             }
 
-            if (prendaEncontrada != null) {
-                System.out.print("¿Qué cantidad desea?: ");
-                int cantidad = sc.nextInt();
-                sc.nextLine();
+            System.out.print("Ingrese el código de prenda que desea: ");
+            String codigoPrenda= sc.nextLine();
 
-                if (prendaEncontrada.validarStock(cantidad)) {
-                    prendaEncontrada.reducirStock(cantidad);
+            for (Inventario inventario: listaInventarios) {
 
-                    DetalleVenta nuevoDetalle = new DetalleVenta(cantidad, inventarioSucursal);
-                    nuevaVenta.getListaDetallesVenta().add(nuevoDetalle);
+                for (Prenda prenda : inventario.getListaPrendas()) {
+                    int i=0;
+                    if (prenda.getCodigo().equalsIgnoreCase(codigoPrenda)) {
 
-                    System.out.println(">> Producto añadido al carrito correctamente.");
-                } else {
-                    System.out.println(">> No hay suficiente stock disponible.");
+                        System.out.print("¿Qué cantidad desea?: ");
+                        int cantidad = sc.nextInt();
+                        sc.nextLine();
+
+                        //Uso de stock
+                        if (prenda.validarStock(cantidad)) {
+                            //reducir stock
+                            prenda.reducirStock(cantidad);
+
+                            DetalleVenta nuevoDetalle = new DetalleVenta(cantidad, inventario);
+
+                            for (Sucursal sucursal: listaSucursales){
+                                for (Venta venta: sucursal.getListaVentas()){
+                                    venta.getListaDetallesVenta().add(nuevoDetalle);
+                                    venta1= venta;
+                                }
+                            }
+                            System.out.println("Hecho");
+                        }else {
+                            System.out.println("No hay suficiente stock disponible.");
+                        }
+                        break;
+                    }
                 }
-            } else {
-                System.out.println(">> El código de prenda ingresado no existe en esta sucursal.");
             }
-
-            System.out.print("\n¿Desea continuar comprando? (1: Sí / 2: No): ");
+            System.out.println("¿Desea continuar comprando? (1: Sí / 2: No)");
             opcion = sc.nextInt();
             sc.nextLine();
-
-        } while (opcion != 2);
-
-        // 4. Finalizar venta y registrar en Sucursal, Cliente y Vendedor
-        if (!nuevaVenta.getListaDetallesVenta().isEmpty()) {
-            double valorTotal = nuevaVenta.calcularValorTotal(cliente);
-            System.out.println("\n=================================");
-            System.out.println("Compra realizada con éxito.");
-            System.out.println("Cliente: " + cliente.getNombre());
-            System.out.println("Vendedor: " + vendedorAtendiendo.getNombre());
-            System.out.println("Valor Total a Pagar: $" + valorTotal);
-            System.out.println("=================================");
-
-            // Guardar la venta en las 3 referencias clave:
-            sucursalSeleccionada.agregarVenta(nuevaVenta);
-            cliente.agregarCompra(nuevaVenta);
-            vendedorAtendiendo.getListaVendedorVentas().add(nuevaVenta); // Habilita el caso 9
-        } else {
-            System.out.println("No se agregaron productos. Compra cancelada.");
-        }
+        }while (opcion!=2 && opcion==1);
+        double valorTotal= nuevaVenta.calcularValorTotal(cliente);
+        System.out.println("Valor total: " + valorTotal);
     }
 
     //Metodo para mostrar sucursal por codigo
@@ -288,4 +224,3 @@ public class Empresa {
     }
 
 }
-//sasa
