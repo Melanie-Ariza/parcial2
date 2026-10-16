@@ -1,5 +1,7 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Empresa {
     private String nombre;
@@ -9,6 +11,7 @@ public class Empresa {
     //Lista sucursales
     private List<Sucursal> listaSucursales;
     private List<Cliente> listaClientes;
+    private List<Inventario> listaInventarios;
 
     //Constructor
     public Empresa(String nombre, String nit, String direccion) {
@@ -18,6 +21,7 @@ public class Empresa {
 
         listaSucursales = new ArrayList<>();
         listaClientes = new ArrayList<>();
+        listaInventarios = new ArrayList<>();
     }
 
     //Get y set
@@ -60,7 +64,16 @@ public class Empresa {
     public void setListaClientes(List<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
-    //toString
+
+    public List<Inventario> getListaInventarios() {
+        return listaInventarios;
+    }
+
+    public void setListaInventarios(List<Inventario> listaInventarios) {
+        this.listaInventarios = listaInventarios;
+    }
+
+//toString
 
     @Override
     public String toString() {
@@ -68,8 +81,9 @@ public class Empresa {
                 "Nombre: " + nombre +
                 ", NIT: " + nit +
                 ", Dirección: " + direccion +
-                ", Cantidad Sucursales: " + listaSucursales.size() +
-                ", Cantidad Clientes: " + listaClientes.size();
+                ", Lista Sucursales: " + listaSucursales.size() +
+                ", Lista Clientes: " + listaClientes.size()+
+                ", Lista inventarios: "+ listaInventarios;
     }
 
     //Metodos
@@ -113,4 +127,101 @@ public class Empresa {
             return false;
         }
     }
+
+    //Mostrar cliente por documento
+    public Cliente mostrarCliente(int documento) {
+        Cliente cliente1 = null;
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getDocumento() == documento) {
+                cliente1 = cliente;
+            }
+        }
+        return cliente1;
+    }
+
+    //Registrar una venta
+    public void comenzarCompra (Cliente cliente){
+        Scanner sc= new Scanner(System.in);
+        int opcion=1;
+        Venta venta1= null;
+
+        do {
+            for (Inventario inventario: listaInventarios){
+                for (Prenda prenda: inventario.getListaPrendas()) {
+                    System.out.println(prenda);
+                }
+            }
+
+            System.out.print("Ingrese el código de prenda que desea: ");
+            String codigoPrenda= sc.nextLine();
+
+            for (Inventario inventario: listaInventarios) {
+
+                for (Prenda prenda : inventario.getListaPrendas()) {
+                    int i=0;
+                    if (prenda.getCodigo().equalsIgnoreCase(codigoPrenda)) {
+
+                        System.out.print("¿Qué cantidad desea?: ");
+                        int cantidad = sc.nextInt();
+                        sc.nextLine();
+
+                        //Uso de stock
+                        if (prenda.validarStock(cantidad)) {
+                            //reducir stock
+                            prenda.reducirStock(cantidad);
+
+                            DetalleVenta nuevoDetalle = new DetalleVenta(cantidad, inventario);
+
+                            for (Sucursal sucursal: listaSucursales){
+                                for (Venta venta: sucursal.getListaVentas()){
+                                    venta.getListaDetallesVenta().add(nuevoDetalle);
+                                    venta1= venta;
+                                }
+                            }
+                            System.out.println("Hecho");
+                        }else {
+                            System.out.println("No hay suficiente stock disponible.");
+                        }
+                        break;
+                    }
+                }
+            }
+            System.out.println("¿Desea continuar comprando? (1: Sí / 2: No)");
+            opcion = sc.nextInt();
+        }while (opcion!=2);
+        double valorTotal= venta1.calcularValorTotal(cliente);
+        System.out.println("Valor total: " + valorTotal);
+
+        System.out.print("Ingrese nuevo código compra: ");
+        String codigo= sc.nextLine();
+
+        LocalDate fechaCompra = LocalDate.now();
+
+        Venta nuevaVenta= new Venta(codigo, fechaCompra);
+    }
+
+    //Metodo para mostrar sucursal por codigo
+    public Sucursal mostrarSucursal(String codigo) {
+        Sucursal sucursal1 = null;
+        for (Sucursal sucursal : listaSucursales) {
+            if (sucursal.getCodigo().equalsIgnoreCase(codigo)) {
+                sucursal1 = sucursal;
+            }
+        }
+        return sucursal1;
+    }
+
+    //Metodo para consultar prendas agotadas de toda la sucursal
+    public List<Prenda> consultarPrendasAgotadas() {
+        List<Prenda> prendasAgotadas = new ArrayList<>();
+        for (Inventario inventario : listaInventarios) {
+            for (Prenda prenda: inventario.getListaPrendas()) {
+                if (prenda.getCantidad() == 0) {
+                    prendasAgotadas.add(prenda);
+                }
+            }
+        }
+        return prendasAgotadas;
+    }
+
 }

@@ -77,7 +77,6 @@ public class Inventario {
         return existe;
     }
     //Metodo Agregar Prenda
-
     public boolean agregarPrenda(Prenda prenda) {
         boolean prendaAgregada = false;
         boolean prendaVerificada = verificarCombinacionPrenda(prenda.getCodigo(), prenda.getTalla(), prenda.getColor());
@@ -90,16 +89,15 @@ public class Inventario {
         return prendaAgregada;
     }
 
-    //Validar Stock
-    public boolean validarStock(int cantidadSolicitada) {
-        boolean stockValido = false;
-
-        if (cantidad >= cantidadSolicitada) {
-            stockValido = true;
+    //Metodo para mostrar prenda por codigo
+    public Prenda mostrarPrenda(String codigo) {
+        Prenda prenda1 = null;
+        for (Prenda prenda : listaPrendas) {
+            if (prenda.getCodigo() == codigo) {
+                prenda1 = prenda;
+            }
         }
-
-        return stockValido;
+        return prenda1;
     }
-
 }
 

@@ -92,13 +92,33 @@ public class Prenda {
                 ", talla: " + talla +
                 ", categoriaPrenda " + categoriaPrenda;
     }
-//Metodo calcular sobrecargo
-public double calcularSobrecargo() {
-    if (this.categoriaPrenda == null) {
+    //Metodo calcular sobrecargo
+    public double calcularSobrecargo() {
+        if (this.categoriaPrenda == null) {
         return 0.0;
+        }
+        return precioUnitario * categoriaPrenda.getSobrecargo();
     }
-    return precioUnitario * categoriaPrenda.getSobrecargo();
-}
+
+    //Validar Stock
+    public boolean validarStock(int cantidadSolicitada) {
+        boolean stockValido = false;
+
+        if (cantidad >= cantidadSolicitada) {
+            stockValido = true;
+        }
+
+        return stockValido;
+    }
+
+    //Reducir stock tras compra
+    public void reducirStock(int cantidadSolicitada) {
+        if (validarStock(cantidadSolicitada)) {
+            this.cantidad -= cantidadSolicitada;
+        }
+
+
+    }
 
 }
 

@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Vendedor extends Persona {
     private String codigo;
@@ -53,31 +54,6 @@ public class Vendedor extends Persona {
 
     }
 
-    //Metodos
-    // 1. Verificar Venta
-    public boolean verificarVenta(String codigo) {
-        boolean verificado = false;
-        for (Venta venta : listaVendedorVentas) {
-            if (venta.getCodigo().equalsIgnoreCase(codigo)) {
-                verificado = true;
-                break;
-            }
-        }
-        return verificado;
-    }
-
-    // 2. Crear Venta
-    public boolean crearVenta(Venta venta) {
-        boolean ventaCreada = false;
-        boolean ventaVerificada = verificarVenta(venta.getCodigo());
-
-        if (!ventaVerificada) {
-            listaVendedorVentas.add(venta);
-            ventaCreada = true;
-        }
-
-        return ventaCreada;
-    }
 }
 
 
