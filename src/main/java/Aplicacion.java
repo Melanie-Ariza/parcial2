@@ -27,8 +27,8 @@ public class Aplicacion {
 
 
         //Prendas
-        Prenda prenda1= new Prenda("CM001","Camisa deportiva", "Nike", 65000,"Negro",0,Talla.L,CategoriaPrenda.CAMISETA);
-        Prenda prenda11= new Prenda("CM002","Camisa polo", "Stars", 70000,"Azul rey",0,Talla.XL,CategoriaPrenda.CAMISETA);
+        Prenda prenda1= new Prenda("CM001","Camisa deportiva", "Nike", 65000,"Negro",50,Talla.L,CategoriaPrenda.CAMISETA);
+        Prenda prenda11= new Prenda("CM002","Camisa polo", "Stars", 70000,"Azul rey",50,Talla.XL,CategoriaPrenda.CAMISETA);
         Prenda prenda2= new Prenda("PL001","Pantalon deportiva", "Nike", 65000,"Negro",50,Talla.XS,CategoriaPrenda.PANTALON);
         Prenda prenda22= new Prenda("PL002","Jean Straight", "Arturo calle", 100000,"Gris",50,Talla.M,CategoriaPrenda.PANTALON);
         Prenda prenda3= new Prenda("VS001","Vestido de gala", "Glamour", 150000,"Blanco",50,Talla.L,CategoriaPrenda.VESTIDO);

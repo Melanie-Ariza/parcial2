@@ -188,6 +188,7 @@ public class Empresa {
             }
             System.out.println("¿Desea continuar comprando? (1: Sí / 2: No)");
             opcion = sc.nextInt();
+            sc.nextLine();
         }while (opcion!=2);
         double valorTotal= venta1.calcularValorTotal(cliente);
         System.out.println("Valor total: " + valorTotal);
