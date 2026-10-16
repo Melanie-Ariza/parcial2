@@ -140,58 +140,81 @@ public class Empresa {
     }
 
     //Registrar una venta
-    public void comenzarCompra (Cliente cliente){
-        Scanner sc= new Scanner(System.in);
-        int opcion=1;
-        Venta venta1= null;
-        System.out.print("Ingrese nuevo código compra: ");
-        String codigo= sc.nextLine();
+    public void comenzarCompra(Cliente cliente) {
+        Scanner sc = new Scanner(System.in);
 
-        LocalDate fechaCompra = LocalDate.now();
-        Venta nuevaVenta= new Venta(codigo, fechaCompra);
+        if (listaSucursales.isEmpty()) {
+            System.out.println("No hay sucursales registradas.");
+            return;
+        }
+
+        // 1. Seleccionar la sucursal donde se realiza la compra
+        System.out.println("--- Seleccione la Sucursal ---");
+        for (int i = 0; i < listaSucursales.size(); i++) {
+            Sucursal suc = listaSucursales.get(i);
+            System.out.println((i + 1) + ". " + suc.getNombre() + " (" + suc.getCiudad() + ")");
+        }
+        System.out.print("Ingrese número de sucursal: ");
+        int opcionSucursal = sc.nextInt();
+        sc.nextLine();
+
+        if (opcionSucursal < 1 || opcionSucursal > listaSucursales.size()) {
+            System.out.println("Opción de sucursal inválida.");
+            return;
+        }
+
+        Sucursal sucursalSeleccionada = listaSucursales.get(opcionSucursal - 1);
+        Inventario inventarioSucursal = sucursalSeleccionada.getInventario();
+
+        // 2. Pedir el código de venta e instanciarla desde el inicio
+        System.out.print("Ingrese el código para la nueva compra: ");
+        String codigoVenta = sc.nextLine();
+
+        Venta nuevaVenta = new Venta(codigoVenta, LocalDate.now());
+        int opcion = 1;
 
         do {
-            System.out.print("Ingrese el código de prenda que desea: ");
-            String codigoPrenda= sc.nextLine();
+            System.out.println("\n--- Catálogo de Prendas Disponibles ---");
+            for (Prenda prenda : inventarioSucursal.getListaPrendas()) {
+                System.out.println(prenda);
+            }
 
-            for (Inventario inventario: listaInventarios) {
+            System.out.print("\nIngrese el código de prenda que desea comprar: ");
+            String codigoPrenda = sc.nextLine();
 
-                for (Prenda prenda : inventario.getListaPrendas()) {
-                    int i=0;
-                    if (prenda.getCodigo().equalsIgnoreCase(codigoPrenda)) {
-
-                        System.out.print("¿Qué cantidad desea?: ");
-                        int cantidad = sc.nextInt();
-                        sc.nextLine();
-
-                        //Uso de stock
-                        if (prenda.validarStock(cantidad)) {
-                            //reducir stock
-                            prenda.reducirStock(cantidad);
-
-                            DetalleVenta nuevoDetalle = new DetalleVenta(cantidad, inventario);
-
-                            for (Sucursal sucursal: listaSucursales){
-                                for (Venta venta: sucursal.getListaVentas()){
-                                    venta.getListaDetallesVenta().add(nuevoDetalle);
-                                    venta1= venta;
-                                }
-                            }
-                            System.out.println("Hecho");
-                        }else {
-                            System.out.println("No hay suficiente stock disponible.");
-                        }
-                        break;
-                    }
+            Prenda prendaEncontrada = null;
+            for (Prenda prenda : inventarioSucursal.getListaPrendas()) {
+                if (prenda.getCodigo().equalsIgnoreCase(codigoPrenda)) {
+                    prendaEncontrada = prenda;
+                    break;
                 }
             }
-            System.out.println("¿Desea continuar comprando? (1: Sí / 2: No)");
+
+            if (prendaEncontrada != null) {
+                System.out.print("¿Qué cantidad desea?: ");
+                int cantidad = sc.nextInt();
+                sc.nextLine();
+
+                if (prendaEncontrada.validarStock(cantidad)) {
+                    prendaEncontrada.reducirStock(cantidad);
+
+                    // Crear detalle de venta asociándolo al inventario de la sucursal
+                    DetalleVenta nuevoDetalle = new DetalleVenta(cantidad, inventarioSucursal);
+                    nuevaVenta.getListaDetallesVenta().add(nuevoDetalle);
+
+                    System.out.println(">> Producto añadido al carrito correctamente.");
+                } else {
+                    System.out.println(">> No hay suficiente stock disponible.");
+                }
+            } else {
+                System.out.println(">> El código de prenda ingresado no existe en esta sucursal.");
+            }
+
+            System.out.print("\n¿Desea continuar comprando en esta sucursal? (1: Sí / 2: No): ");
             opcion = sc.nextInt();
             sc.nextLine();
-        }while (opcion!=2 && opcion==1);
-        double valorTotal= nuevaVenta.calcularValorTotal(cliente);
-        System.out.println("Valor total: " + valorTotal);
-    }
+
+        } while (opcion != 2);
 
     //Metodo para mostrar sucursal por codigo
     public Sucursal mostrarSucursal(String codigo) {
