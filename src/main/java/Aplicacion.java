@@ -152,121 +152,121 @@ public class Aplicacion {
                     System.out.println("Prenda " + nuevaPrenda.getNombre() + " registrada correctamente");
                     break;
 
-            case 2:
-                System.out.println("======= Registrar cliente o vendedor =======");
-                System.out.println("1. Registrar Cliente");
-                System.out.println("2. Registrar Vendedor");
-                System.out.print("Seleccione opción: ");
-                int tipoReg = sc.nextInt();
-                sc.nextLine();
-
-                System.out.print("Ingrese número de documento: ");
-                int doc = sc.nextInt();
-                sc.nextLine();
-
-                System.out.print("Ingrese nombre completo: ");
-                String nom = sc.nextLine();
-
-                System.out.print("Ingrese correo electrónico: ");
-                String cor = sc.nextLine();
-
-                System.out.print("Ingrese teléfono: ");
-                String tel = sc.nextLine();
-
-                if (tipoReg == 1) {
-                    System.out.print("Ingrese código de afiliación de cliente: ");
-                    String codCli = sc.nextLine();
-
-                    System.out.println("Categoría:\n1. Bronce (5% desc)\n2. Plata (10% desc)\n3. Oro (15% desc)");
-                    System.out.print("Seleccione categoría: ");
-                    int opcCat = sc.nextInt();
+                case 2:
+                    System.out.println("======= Registrar cliente o vendedor =======");
+                    System.out.println("1. Registrar Cliente");
+                    System.out.println("2. Registrar Vendedor");
+                    System.out.print("Seleccione opción: ");
+                    int tipoReg = sc.nextInt();
                     sc.nextLine();
 
-                    CategoriaCliente cat = CategoriaCliente.BRONCE;
-                    if (opcCat == 2) cat = CategoriaCliente.PLATA;
-                    else if (opcCat == 3) cat = CategoriaCliente.ORO;
-
-                    Cliente clienteNuevo = new Cliente(doc, nom, cor, tel, codCli, cat);
-                    if (empresa.agregarClientes(clienteNuevo)) {
-                        System.out.println("Cliente registrado correctamente");
-                    } else {
-                        System.out.println("Error: Ya existe un cliente con ese código.");
-                    }
-
-                } else if (tipoReg == 2) {
-                    System.out.print("Ingrese código de vendedor: ");
-                    String codVen = sc.nextLine();
-
-                    System.out.print("Ingrese salario básico: ");
-                    double salario = sc.nextDouble();
+                    System.out.print("Ingrese número de documento: ");
+                    int doc = sc.nextInt();
                     sc.nextLine();
 
-                    Vendedor vendedorNuevo = new Vendedor(doc, nom, cor, tel, codVen, LocalDate.now(), salario);
-                    System.out.println("Vendedor " + vendedorNuevo.getNombre() + " registrado con éxito");
-                } else {
-                    System.out.println("Opción no válida.");
-                }
-                break;
-            case 3:
-                System.out.println("======= Registrar inventario en sucursal =======");
-                System.out.print("Ingrese el código de la sucursal (456, 789, 135): ");
-                String codSucInv = sc.nextLine();
+                    System.out.print("Ingrese nombre completo: ");
+                    String nom = sc.nextLine();
 
-                boolean sucursalEncontrada = false;
-                for (Sucursal sucursal : empresa.getListaSucursales()) {
-                    if (sucursal.getCodigo().equalsIgnoreCase(codSucInv)) {
-                        sucursalEncontrada = true;
+                    System.out.print("Ingrese correo electrónico: ");
+                    String cor = sc.nextLine();
 
-                        System.out.println("Sucursal seleccionada: " + sucursal.getNombre());
-                        System.out.print("Ingrese la cantidad de stock a actualizar/sumar: ");
-                        int nuevaCantidad = sc.nextInt();
+                    System.out.print("Ingrese teléfono: ");
+                    String tel = sc.nextLine();
+
+                    if (tipoReg == 1) {
+                        System.out.print("Ingrese código de afiliación de cliente: ");
+                        String codCli = sc.nextLine();
+
+                        System.out.println("Categoría:\n1. Bronce (5% desc)\n2. Plata (10% desc)\n3. Oro (15% desc)");
+                        System.out.print("Seleccione categoría: ");
+                        int opcCat = sc.nextInt();
                         sc.nextLine();
 
-                        // Actualizar el stock existente del inventario
-                        sucursal.getInventario().setCantidad(nuevaCantidad);
-                        System.out.println(">> Stock del inventario actualizado con éxito a " + nuevaCantidad + " unidades.");
-                    }
-                }
+                        CategoriaCliente cat = CategoriaCliente.BRONCE;
+                        if (opcCat == 2) cat = CategoriaCliente.PLATA;
+                        else if (opcCat == 3) cat = CategoriaCliente.ORO;
 
-                if (!sucursalEncontrada) {
-                    System.out.println(">> Error: No existe ninguna sucursal con el código " + codSucInv);
-                }
-                break;
-            case 4:
-                System.out.println("======= Consultar prendas disponibles por sucursal =======");
-                System.out.print("Ingrese el código de la sucursal a consultar (456, 789, 135): ");
-                String codSucConsulta = sc.nextLine();
-
-                int encontradaCase4 = 0;
-                for (Sucursal sucursal : empresa.getListaSucursales()) {
-                    if (sucursal.getCodigo().equalsIgnoreCase(codSucConsulta)) {
-                        encontradaCase4 = 1;
-
-                        System.out.println("Prendas en la sucursal " + sucursal.getNombre() + " (" + sucursal.getCiudad() + "):");
-                        Inventario inv = sucursal.getInventario();
-
-                        System.out.println("Stock general de la sede: " + inv.getCantidad() + " unidades.");
-
-                        if (inv.getListaPrendas().size() == 0) {
-                            System.out.println(">> No hay prendas asociadas a este inventario.");
+                        Cliente clienteNuevo = new Cliente(doc, nom, cor, tel, codCli, cat);
+                        if (empresa.agregarClientes(clienteNuevo)) {
+                            System.out.println("Cliente registrado correctamente");
                         } else {
-                            for (Prenda prenda : inv.getListaPrendas()) {
-                                System.out.println(" - " + prenda.getNombre() +
-                                        " | Ref: " + prenda.getCodigo() +
-                                        " | Marca: " + prenda.getMarca() +
-                                        " | Cantidad: " + prenda.getCantidad() +
-                                        " | Talla: " + prenda.getTalla() +
-                                        " | Color: " + prenda.getColor() +
-                                        " | Precio: $" + prenda.getPrecioUnitario());
+                            System.out.println("Error: Ya existe un cliente con ese código.");
+                        }
+
+                    } else if (tipoReg == 2) {
+                        System.out.print("Ingrese código de empleado vendedor: ");
+                        String codVen = sc.nextLine();
+
+                        System.out.print("Ingrese salario básico: ");
+                        double salario = sc.nextDouble();
+                        sc.nextLine();
+
+                        Vendedor vendedorNuevo = new Vendedor(doc, nom, cor, tel, codVen, LocalDate.now(), salario);
+                        System.out.println("Vendedor " + vendedorNuevo.getNombre() + " registrado con éxito");
+                    } else {
+                        System.out.println("Opción no válida.");
+                    }
+                    break;
+                case 3:
+                    System.out.println("======= Registrar inventario en sucursal =======");
+                    System.out.print("Ingrese el código de la sucursal (456, 789, 135): ");
+                    String codSucInv = sc.nextLine();
+
+                    boolean sucursalEncontrada = false;
+                    for (Sucursal sucursal : empresa.getListaSucursales()) {
+                        if (sucursal.getCodigo().equalsIgnoreCase(codSucInv)) {
+                            sucursalEncontrada = true;
+
+                            System.out.println("Sucursal seleccionada: " + sucursal.getNombre());
+                            System.out.print("Ingrese la cantidad de stock a actualizar/sumar: ");
+                            int nuevaCantidad = sc.nextInt();
+                            sc.nextLine();
+
+                            // Actualizar el stock existente del inventario
+                            sucursal.getInventario().setCantidad(nuevaCantidad);
+                            System.out.println(">> Stock del inventario actualizado con éxito a " + nuevaCantidad + " unidades.");
+                        }
+                    }
+
+                    if (!sucursalEncontrada) {
+                        System.out.println(">> Error: No existe ninguna sucursal con el código " + codSucInv);
+                    }
+                    break;
+                case 4:
+                    System.out.println("======= Consultar prendas disponibles por sucursal =======");
+                    System.out.print("Ingrese el código de la sucursal a consultar (456, 789, 135): ");
+                    String codSucConsulta = sc.nextLine();
+
+                    int encontradaCase4 = 0;
+                    for (Sucursal sucursal : empresa.getListaSucursales()) {
+                        if (sucursal.getCodigo().equalsIgnoreCase(codSucConsulta)) {
+                            encontradaCase4 = 1;
+
+                            System.out.println("Prendas en la sucursal " + sucursal.getNombre() + " (" + sucursal.getCiudad() + "):");
+                            Inventario inv = sucursal.getInventario();
+
+                            System.out.println("Stock general de la sede: " + inv.getCantidad() + " unidades.");
+
+                            if (inv.getListaPrendas().size() == 0) {
+                                System.out.println(">> No hay prendas asociadas a este inventario.");
+                            } else {
+                                for (Prenda prenda : inv.getListaPrendas()) {
+                                    System.out.println(" - " + prenda.getNombre() +
+                                            " | Ref: " + prenda.getCodigo() +
+                                            " | Marca: " + prenda.getMarca() +
+                                            " | Cantidad: " + prenda.getCantidad() +
+                                            " | Talla: " + prenda.getTalla() +
+                                            " | Color: " + prenda.getColor() +
+                                            " | Precio: $" + prenda.getPrecioUnitario());
+                                }
                             }
                         }
                     }
-                }
 
-                if (encontradaCase4 == 0) {
-                    System.out.println("Error: No existe ninguna sucursal con el código " + codSucConsulta);
-                }
-                break;
+                    if (encontradaCase4 == 0) {
+                        System.out.println("Error: No existe ninguna sucursal con el código " + codSucConsulta);
+                    }
+                    break;
                 case 5:
                     System.out.println("======= Realizar compra =======");
 
