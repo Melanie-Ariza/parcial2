@@ -154,7 +154,7 @@ public class Empresa {
             Sucursal suc = listaSucursales.get(i);
             System.out.println((i + 1) + ". " + suc.getNombre() + " (" + suc.getCiudad() + ")");
         }
-        System.out.print("Ingrese número de sucursal: ");
+        System.out.print("Ingrese el número de la sucursal: ");
         int opcionSucursal = sc.nextInt();
         sc.nextLine();
 
@@ -166,11 +166,40 @@ public class Empresa {
         Sucursal sucursalSeleccionada = listaSucursales.get(opcionSucursal - 1);
         Inventario inventarioSucursal = sucursalSeleccionada.getInventario();
 
-        // 2. Pedir el código de venta e instanciarla desde el inicio
+        // 2. Registrar/Validar el Vendedor atendiendo la compra
+        if (sucursalSeleccionada.getListaVendedores().isEmpty()) {
+            System.out.println("Error: Esta sucursal no tiene vendedores registrados.");
+            return;
+        }
+
+        System.out.println("\n--- Vendedores Disponibles en la Sucursal ---");
+        for (Vendedor v : sucursalSeleccionada.getListaVendedores()) {
+            System.out.println(" - " + v.getNombre() + " (Código: " + v.getCodigo() + ")");
+        }
+
+        System.out.print("Ingrese el código del vendedor que atiende la compra: ");
+        String codigoVendedor = sc.nextLine();
+
+        Vendedor vendedorAtendiendo = null;
+        for (Vendedor v : sucursalSeleccionada.getListaVendedores()) {
+            if (v.getCodigo().equalsIgnoreCase(codigoVendedor)) {
+                vendedorAtendiendo = v;
+                break;
+            }
+        }
+
+        if (vendedorAtendiendo == null) {
+            System.out.println("Error: El vendedor con código '" + codigoVendedor + "' no pertenece a esta sucursal.");
+            return;
+        }
+
+        // 3. Pedir el código de compra e instanciar la Venta
         System.out.print("Ingrese el código para la nueva compra: ");
         String codigoVenta = sc.nextLine();
 
         Venta nuevaVenta = new Venta(codigoVenta, LocalDate.now());
+        nuevaVenta.setVendedor(vendedorAtendiendo); // Asociar vendedor a la venta
+
         int opcion = 1;
 
         do {
@@ -198,7 +227,6 @@ public class Empresa {
                 if (prendaEncontrada.validarStock(cantidad)) {
                     prendaEncontrada.reducirStock(cantidad);
 
-                    // Crear detalle de venta asociándolo al inventario de la sucursal
                     DetalleVenta nuevoDetalle = new DetalleVenta(cantidad, inventarioSucursal);
                     nuevaVenta.getListaDetallesVenta().add(nuevoDetalle);
 
@@ -210,24 +238,26 @@ public class Empresa {
                 System.out.println(">> El código de prenda ingresado no existe en esta sucursal.");
             }
 
-            System.out.print("\n¿Desea continuar comprando en esta sucursal? (1: Sí / 2: No): ");
+            System.out.print("\n¿Desea continuar comprando? (1: Sí / 2: No): ");
             opcion = sc.nextInt();
             sc.nextLine();
 
         } while (opcion != 2);
 
-        // 3. Procesar el pago si se agregaron detalles
+        // 4. Finalizar venta y registrar en Sucursal, Cliente y Vendedor
         if (!nuevaVenta.getListaDetallesVenta().isEmpty()) {
             double valorTotal = nuevaVenta.calcularValorTotal(cliente);
             System.out.println("\n=================================");
-            System.out.println("Compra registrada exitosamente.");
+            System.out.println("Compra realizada con éxito.");
             System.out.println("Cliente: " + cliente.getNombre());
-            System.out.println("Valor Total con Descuento: $" + valorTotal);
+            System.out.println("Vendedor: " + vendedorAtendiendo.getNombre());
+            System.out.println("Valor Total a Pagar: $" + valorTotal);
             System.out.println("=================================");
 
-            // Registrar la venta en la sucursal y en el historial del cliente
+            // Guardar la venta en las 3 referencias clave:
             sucursalSeleccionada.agregarVenta(nuevaVenta);
             cliente.agregarCompra(nuevaVenta);
+            vendedorAtendiendo.getListaVendedorVentas().add(nuevaVenta); // Habilita el caso 9
         } else {
             System.out.println("No se agregaron productos. Compra cancelada.");
         }

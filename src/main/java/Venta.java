@@ -5,6 +5,7 @@ import java.util.List;
 public class Venta {
     private String codigo;
     private LocalDate fechaVenta;
+    private Vendedor vendedor;
 
     private List<DetalleVenta> listaDetallesVenta;
 
@@ -17,6 +18,15 @@ public class Venta {
     }
 
     //get y set
+
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
     public String getCodigo() {
         return codigo;
     }
