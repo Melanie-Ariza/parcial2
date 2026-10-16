@@ -215,6 +215,22 @@ public class Empresa {
             sc.nextLine();
 
         } while (opcion != 2);
+
+        // 3. Procesar el pago si se agregaron detalles
+        if (!nuevaVenta.getListaDetallesVenta().isEmpty()) {
+            double valorTotal = nuevaVenta.calcularValorTotal(cliente);
+            System.out.println("\n=================================");
+            System.out.println("Compra registrada exitosamente.");
+            System.out.println("Cliente: " + cliente.getNombre());
+            System.out.println("Valor Total con Descuento: $" + valorTotal);
+            System.out.println("=================================");
+
+            // Registrar la venta en la sucursal y en el historial del cliente
+            sucursalSeleccionada.agregarVenta(nuevaVenta);
+            cliente.agregarCompra(nuevaVenta);
+        } else {
+            System.out.println("No se agregaron productos. Compra cancelada.");
+        }
     }
 
     //Metodo para mostrar sucursal por codigo
