@@ -14,6 +14,9 @@ public class Aplicacion {
         Inventario inventario1= new Inventario("579", 10);
         Inventario inventario2= new Inventario("124", 10);
         Inventario inventario3= new Inventario("457", 10);
+        empresa.getListaInventarios().add(inventario1);
+        empresa.getListaInventarios().add(inventario2);
+        empresa.getListaInventarios().add(inventario3);
 
 
         //Sucursales
@@ -269,6 +272,7 @@ public class Aplicacion {
 
                     System.out.print("Ingrese el documento del cliente: ");
                     int documento= sc.nextInt();
+                    sc.nextLine();
                     Cliente cliente= empresa.mostrarCliente(documento);
 
                     if (cliente!=null){
@@ -361,7 +365,7 @@ public class Aplicacion {
                             break;
                         }
 
-                        if (tieneVentas = true) {
+                        if (tieneVentas) {
                             System.out.println("Ventas realizadas:");
                             for (Venta venta : vendedorSeleccionado.getListaVendedorVentas()) {
                                 System.out.println(venta);
@@ -567,12 +571,11 @@ public class Aplicacion {
                     Inventario nuevoInventario = new Inventario(codigoInventario, cantidadInventario);
                     Sucursal nuevaSucursal = new Sucursal(nombreSucursal, codSucursal, direccionSucursal, ciudadSucursal, nuevoInventario);
 
-                    boolean sucursalRegistrada = empresa.agregarSucursal(nuevaSucursal);
-
-                    if (sucursalRegistrada) {
+                    if (empresa.agregarSucursal(nuevaSucursal)) {
+                        empresa.getListaInventarios().add(nuevoInventario);
                         System.out.println("Sucursal registrada exitosamente.");
                     } else {
-                        System.out.println("No se pudo registrar la sucursal (Código de sucursal yw existente)");
+                        System.out.println("No se pudo registrar la sucursal (Código de sucursal ya existente)");
                     }
                     break;
                 default:
