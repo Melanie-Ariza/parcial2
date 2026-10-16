@@ -215,6 +215,7 @@ public class Empresa {
             sc.nextLine();
 
         } while (opcion != 2);
+    }
 
     //Metodo para mostrar sucursal por codigo
     public Sucursal mostrarSucursal(String codigo) {
