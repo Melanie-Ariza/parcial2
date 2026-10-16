@@ -191,7 +191,7 @@ public class Aplicacion {
                     }
 
                 } else if (tipoReg == 2) {
-                    System.out.print("Ingrese código de empleado vendedor: ");
+                    System.out.print("Ingrese código de vendedor: ");
                     String codVen = sc.nextLine();
 
                     System.out.print("Ingrese salario básico: ");
